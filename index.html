@@ -3,156 +3,113 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#11131b">
-  <meta name="description" content="CoachingOver : des conseils simples pour progresser sur Overwatch, comprendre ton rôle et mieux jouer en équipe.">
-  <title>CoachingOver — Progresse ensemble</title>
+  <meta name="theme-color" content="#0b0d13">
+  <meta name="description" content="Découvre Overwatch et progresse avec CoachingOver : guides de héros, conseils et stratégies accessibles à tous.">
+  <title>CoachingOver — Comprends le jeu. Passe au niveau supérieur.</title>
   <style>
-    :root{color-scheme:dark;--bg:#101119;--panel:#191b27;--panel2:#202332;--text:#f5f5fb;--muted:#b7b9ca;--orange:#ff914d;--orange2:#ffb36f;--line:#343648}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 85% 0%,#382238 0,transparent 38%),var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-    a{color:inherit;text-decoration:none}button,input{font:inherit}.wrap{width:min(1120px,92%);margin:auto}
-    header{position:sticky;top:0;z-index:10;background:#101119eF;backdrop-filter:blur(12px);border-bottom:1px solid #ffffff12}
-    .nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-size:1.2rem;font-weight:900;letter-spacing:.2px}.brand span{color:var(--orange)}
-    nav{display:flex;gap:22px;align-items:center}nav a{color:var(--muted);font-size:.94rem}nav a:hover{color:white}.menu{display:none}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 17px;border:1px solid transparent;border-radius:12px;background:var(--orange);color:#21130b;font-weight:800;cursor:pointer;transition:transform .15s,background .15s}.btn:hover{transform:translateY(-2px);background:var(--orange2)}.btn.secondary{background:transparent;border-color:var(--line);color:var(--text)}.btn.secondary:hover{border-color:var(--orange)}
-    .hero{padding:86px 0 72px;display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center}.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--orange2);font-weight:800;text-transform:uppercase;letter-spacing:1.5px;font-size:.76rem}.dot{width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 15px var(--orange)}
-    h1{font-size:clamp(2.6rem,6vw,5rem);line-height:1.02;letter-spacing:-2.5px;margin:18px 0}h1 em{font-style:normal;color:var(--orange)}.lead{font-size:1.13rem;color:var(--muted);max-width:620px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:27px}
-    .hero-card{padding:27px;border-radius:24px;border:1px solid #ffffff16;background:linear-gradient(145deg,#252838,#171923);box-shadow:0 25px 70px #0005;transform:rotate(1deg)}.hero-card .symbol{font-size:3rem}.hero-card h2{font-size:1.5rem;margin:5px 0}.hero-card p{color:var(--muted);margin:0}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}.stat{padding:13px 10px;background:#ffffff08;border-radius:12px;text-align:center}.stat strong{display:block;color:var(--orange2);font-size:1.3rem}.stat span{color:var(--muted);font-size:.76rem}
-    section{padding:62px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:24px}.section-head h2{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.15;margin:8px 0}.section-head p{color:var(--muted);max-width:540px;margin:0}.tag{font-size:.75rem;color:var(--orange2);font-weight:800;text-transform:uppercase;letter-spacing:1.5px}
-    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.feature,.guide,.cta{border:1px solid var(--line);background:var(--panel);border-radius:18px;padding:22px}.feature .icon{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:#ff914d1c;font-size:1.4rem}.feature h3{margin:15px 0 6px}.feature p{color:var(--muted);margin:0}
-    .filters{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0 20px}.filter{background:var(--panel);border:1px solid var(--line);border-radius:999px;color:var(--muted);padding:8px 14px;cursor:pointer}.filter.active,.filter:hover{color:#21130b;background:var(--orange);border-color:var(--orange);font-weight:800}
-    .search{width:min(100%,320px);padding:10px 13px;border:1px solid var(--line);border-radius:11px;background:var(--panel);color:var(--text)}.guides{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.guide{padding:0;overflow:hidden;display:flex;flex-direction:column}.guide-top{padding:21px;background:linear-gradient(130deg,#30283a,#202332);display:flex;justify-content:space-between;align-items:center;gap:12px}.hero-symbol{font-size:2.6rem}.role{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--orange2);font-weight:900}.guide-body{padding:20px;display:flex;flex-direction:column;flex:1}.guide-body h3{margin:3px 0 8px}.guide-body p{color:var(--muted);margin:0 0 16px;font-size:.94rem}.guide-body button{margin-top:auto;align-self:flex-start}.detail{margin-top:14px;padding-top:13px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}.detail ul{padding-left:20px;margin:7px 0}.hidden{display:none!important}
-    .cta{display:flex;align-items:center;justify-content:space-between;gap:25px;padding:30px;background:linear-gradient(115deg,#28202d,#1a1c28)}.cta h2{margin:4px 0;font-size:1.8rem}.cta p{color:var(--muted);margin:0}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:step}.step{padding:20px;border-top:2px solid var(--orange);background:#ffffff05;border-radius:0 0 14px 14px}.step:before{counter-increment:step;content:"0" counter(step);color:var(--orange);font-weight:900;font-size:.82rem}.step h3{margin:8px 0 5px}.step p{margin:0;color:var(--muted)}
-    footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.86rem}.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-    @media(max-width:760px){.hero{grid-template-columns:1fr;padding:58px 0}.hero-card{transform:none}.feature-grid,.guides,.steps{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-direction:column}.cta{align-items:flex-start;flex-direction:column}nav{gap:12px;flex-wrap:wrap;justify-content:flex-end}nav a{font-size:.84rem}.nav{padding:12px 0}.brand{font-size:1rem}}
-    @media(max-width:430px){nav a:not(.nav-cta){display:none}h1{letter-spacing:-1.5px}.stats{grid-template-columns:1fr 1fr 1fr}}
+    :root{--bg:#0b0d13;--surface:#131722;--surface2:#191f2c;--line:#2a3040;--text:#f6f7fb;--muted:#aab2c4;--orange:#ff914d;--orange2:#ffc08b;--blue:#7dd3fc}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:88px}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}a{color:inherit;text-decoration:none}button,input{font:inherit}.wrap{width:min(1140px,91%);margin:auto}
+    .site-header{position:sticky;top:0;z-index:20;background:#0b0d13eF;border-bottom:1px solid #ffffff12;backdrop-filter:blur(16px)}.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:22px}.brand{font-size:1.18rem;font-weight:950;letter-spacing:-.6px}.brand-mark{display:inline-grid;place-items:center;width:34px;height:34px;margin-right:8px;border-radius:11px;background:var(--orange);color:#17100b}.brand span:last-child{color:var(--orange)}nav{display:flex;align-items:center;gap:25px}nav a{font-size:.92rem;color:var(--muted);transition:color .2s}nav a:hover{color:white}
+    .button{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 18px;border-radius:12px;background:var(--orange);border:1px solid var(--orange);color:#1b120d;font-weight:850;transition:transform .18s,background .18s}.button:hover{transform:translateY(-2px);background:var(--orange2);border-color:var(--orange2)}.button.ghost{background:transparent;color:var(--text);border-color:#ffffff2b}.button.ghost:hover{border-color:var(--orange);background:#ff914d12}
+    .hero{position:relative;isolation:isolate;overflow:hidden;padding:88px 0 80px;background:radial-gradient(ellipse at 82% 35%,#61391f45,transparent 32%),radial-gradient(ellipse at 10% 5%,#174e6b28,transparent 34%)}.hero:after{content:"";position:absolute;z-index:-1;width:400px;height:400px;right:-170px;top:30px;border:1px solid #ff914d2c;border-radius:50%;box-shadow:0 0 0 45px #ff914d08,0 0 0 95px #ff914d05}.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:center}.eyebrow,.kicker{display:inline-flex;align-items:center;gap:9px;color:var(--orange2);font-size:.76rem;font-weight:900;text-transform:uppercase;letter-spacing:1.8px}.eyebrow:before{content:"";width:22px;height:2px;background:var(--orange)}h1{font-size:clamp(2.7rem,6vw,5.4rem);letter-spacing:-.065em;line-height:.99;margin:20px 0 24px;max-width:730px}h1 span{color:var(--orange)}.hero-copy{max-width:630px;color:var(--muted);font-size:1.12rem}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}.hero-note{margin-top:22px;color:#7f899e;font-size:.84rem}
+    .visual-panel{position:relative;padding:28px;border:1px solid #ffffff1c;border-radius:26px;background:linear-gradient(145deg,#1b2230f2,#11151ef5);box-shadow:0 30px 90px #0007}.visual-top{display:flex;justify-content:space-between;align-items:center;gap:12px}.live-pill{font-size:.72rem;font-weight:800;color:#b4f4c4;background:#1e4b353d;border:1px solid #4ba66d55;border-radius:99px;padding:5px 10px}.visual-icon{height:145px;display:grid;place-items:center;font-size:5.4rem;margin:12px 0;background:radial-gradient(circle,#ff914d2b,transparent 58%);border-radius:20px}.visual-panel h2{font-size:1.55rem;line-height:1.2;margin:10px 0}.visual-panel p{margin:0;color:var(--muted);font-size:.94rem}.role-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:23px}.role-chip{padding:12px 8px;text-align:center;border-radius:12px;background:#ffffff08;border:1px solid #ffffff0d}.role-chip b{display:block;font-size:.86rem}.role-chip small{color:var(--muted);font-size:.72rem}
+    section{padding:76px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:30px}.section-head h2{font-size:clamp(2rem,4vw,3.15rem);letter-spacing:-.045em;line-height:1.08;margin:9px 0 0}.section-head>p{max-width:520px;color:var(--muted);margin:0}.kicker{font-size:.72rem}.intro-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:38px;align-items:start}.intro-callout{padding:27px;border-radius:20px;background:linear-gradient(145deg,#202837,#121720);border:1px solid var(--line)}.intro-callout .big-icon{font-size:2rem}.intro-callout h3{font-size:1.35rem;margin:8px 0}.intro-callout p{margin:0;color:var(--muted)}.intro-copy h3{font-size:1.35rem;margin:0 0 10px}.intro-copy p{color:var(--muted);margin:0 0 14px}.roles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}.role-card{padding:22px;border-radius:17px;background:var(--surface);border:1px solid var(--line)}.role-card .emoji{font-size:1.8rem}.role-card h3{margin:8px 0 4px}.role-card p{margin:0;color:var(--muted);font-size:.92rem}
+    .about-section{background:linear-gradient(180deg,#10141e,#0b0d13)}.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.about-card{padding:27px;border-radius:20px;border:1px solid var(--line);background:var(--surface)}.about-card .number{color:var(--orange);font-weight:950;font-size:.78rem;letter-spacing:1px}.about-card h3{font-size:1.3rem;margin:8px 0}.about-card p{margin:0;color:var(--muted)}.mission{padding:32px;border-radius:22px;border:1px solid #ff914d50;background:linear-gradient(120deg,#ff914d17,#151923 65%);margin-bottom:18px}.mission h3{font-size:1.55rem;margin:0 0 8px}.mission p{max-width:800px;color:var(--muted);margin:0}
+    .library-tools{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin:20px 0}.search{width:min(100%,320px);padding:11px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text)}.filters{display:flex;gap:8px;flex-wrap:wrap}.filter{border:1px solid var(--line);border-radius:99px;padding:8px 14px;color:var(--muted);background:var(--surface);cursor:pointer}.filter.active,.filter:hover{background:var(--orange);color:#20140d;border-color:var(--orange);font-weight:850}.guides{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.guide{display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:var(--surface);transition:transform .2s,border-color .2s}.guide:hover{transform:translateY(-4px);border-color:#ff914d85}.guide-top{display:flex;align-items:center;justify-content:space-between;padding:19px 20px;background:linear-gradient(135deg,#242b3a,#181d28);border-bottom:1px solid var(--line)}.role-label{color:var(--orange2);font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:1.4px}.guide-top h3{margin:3px 0 0;font-size:1.3rem}.hero-icon{font-size:2.5rem}.guide-body{padding:19px;display:flex;flex:1;flex-direction:column}.guide-body p{margin:0 0 16px;color:var(--muted);font-size:.93rem}.guide-body button{margin-top:auto;align-self:flex-start}.detail{margin-top:15px;padding-top:13px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}.detail ul{padding-left:19px;margin:7px 0}.hidden{display:none!important}
+    .plan-section{padding-top:10px}.plan-banner{display:flex;align-items:center;justify-content:space-between;gap:25px;padding:31px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(110deg,#1d2733,#17151b)}.plan-banner h2{margin:5px 0;font-size:1.8rem}.plan-banner p{color:var(--muted);margin:0}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:18px}.step{padding:21px;border-radius:16px;background:var(--surface);border:1px solid var(--line)}.step .step-num{font-weight:950;color:var(--orange);font-size:.8rem}.step h3{margin:7px 0}.step p{color:var(--muted);margin:0;font-size:.94rem}
+    footer{border-top:1px solid var(--line);padding:27px 0;color:#8d96aa;font-size:.84rem}.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}.footer-brand{font-weight:900;color:var(--text)}.footer-brand span{color:var(--orange)}
+    @media(max-width:800px){.hero{padding:64px 0}.hero-grid,.intro-grid{grid-template-columns:1fr;gap:28px}.visual-panel{max-width:560px}.section-head{align-items:flex-start;flex-direction:column;gap:12px}.guides{grid-template-columns:repeat(2,1fr)}.roles-grid{grid-template-columns:1fr}.about-grid{grid-template-columns:1fr 1fr}.nav{min-height:68px}nav{gap:13px}nav a{font-size:.83rem}}
+    @media(max-width:540px){nav a:not(.nav-cta){display:none}.guides,.about-grid,.steps{grid-template-columns:1fr}.hero-grid{gap:25px}.visual-panel{padding:21px}.role-strip{gap:6px}.role-chip{padding:10px 4px}.plan-banner{align-items:flex-start;flex-direction:column;padding:24px}section{padding:58px 0}h1{font-size:clamp(2.8rem,14vw,4.2rem)}}
   </style>
 </head>
 <body>
-<header>
+<header class="site-header">
   <div class="wrap nav">
-    <a class="brand" href="#accueil">Coaching<span>Over</span> 🎯</a>
+    <a class="brand" href="#accueil" aria-label="CoachingOver, accueil"><span class="brand-mark">C</span>Coaching<span>Over</span></a>
     <nav aria-label="Navigation principale">
-      <a href="#methodes">Méthode</a><a href="#guides">Guides</a><a href="#coaching">Coaching</a>
-      <a class="btn nav-cta" href="#guides">Progresser ↗</a>
+      <a href="#overwatch">Overwatch</a><a href="#apropos">Qui sommes-nous ?</a><a href="#guides">Les héros</a><a class="button nav-cta" href="#progression">Progresser ↗</a>
     </nav>
   </div>
 </header>
 <main>
-  <div class="wrap hero" id="accueil">
-    <div>
-      <div class="eyebrow"><span class="dot"></span> Ton prochain niveau commence ici</div>
-      <h1>Joue mieux.<br><em>Réfléchis</em> plus vite.</h1>
-      <p class="lead">Des conseils clairs pour progresser sur Overwatch : comprendre ton rôle, prendre de meilleures décisions et aider ton équipe à gagner ensemble.</p>
-      <div class="actions"><a class="btn" href="#guides">Découvrir les guides <span aria-hidden="true">→</span></a><a class="btn secondary" href="#methodes">Notre méthode</a></div>
+  <section class="hero" id="accueil">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Bienvenue sur CoachingOver</div>
+        <h1>Comprends le jeu.<br><span>Passe au niveau</span> supérieur.</h1>
+        <p class="hero-copy">Tu débutes sur Overwatch ou tu veux améliorer ton niveau ? Retrouve des explications simples, des guides de héros et des conseils pour mieux jouer avec ton équipe.</p>
+        <div class="hero-actions"><a class="button" href="#guides">Explorer les héros <span aria-hidden="true">→</span></a><a class="button ghost" href="#apropos">Découvrir notre projet</a></div>
+        <p class="hero-note">Un projet indépendant pour apprendre à son rythme. Pas besoin d'être un pro pour commencer.</p>
+      </div>
+      <aside class="visual-panel">
+        <div class="visual-top"><span class="kicker">Le jeu en quelques mots</span><span class="live-pill">Joue collectif</span></div>
+        <div class="visual-icon" aria-hidden="true">🎮</div>
+        <h2>Chaque héros a son rôle. Chaque décision compte.</h2>
+        <p>Overwatch est un jeu d'action en équipe où tu choisis un héros, utilises ses capacités et coopères avec tes alliés pour remplir l'objectif du mode.</p>
+        <div class="role-strip"><div class="role-chip"><b>🛡️ Tank</b><small>Créer de l'espace</small></div><div class="role-chip"><b>🎯 Dégâts</b><small>Mettre la pression</small></div><div class="role-chip"><b>💚 Soutien</b><small>Aider l'équipe</small></div></div>
+      </aside>
     </div>
-    <aside class="hero-card" aria-label="Présentation CoachingOver">
-      <div class="symbol">⚡</div>
-      <div class="tag">Le petit rappel du jour</div>
-      <h2>La régularité bat le hasard.</h2>
-      <p>Choisis un objectif simple par partie. Concentre-toi dessus, puis prends un instant pour revoir ce qui a fonctionné.</p>
-      <div class="stats"><div class="stat"><strong>01</strong><span>objectif à la fois</span></div><div class="stat"><strong>3</strong><span>rôles à maîtriser</span></div><div class="stat"><strong>GG</strong><span>esprit d’équipe</span></div></div>
-    </aside>
-  </div>
+  </section>
 
-  <section id="methodes">
+  <section id="overwatch">
     <div class="wrap">
-      <div class="section-head"><div><div class="tag">La méthode</div><h2>Progresse sans te disperser.</h2></div><p>Pas besoin de tout changer en une journée. Travaille une compétence à la fois et transforme tes parties en occasions d'apprendre.</p></div>
-      <div class="feature-grid">
-        <article class="feature"><div class="icon">🎯</div><h3>Un objectif clair</h3><p>Choisis une compétence à travailler : placement, survie, précision ou utilisation des capacités.</p></article>
-        <article class="feature"><div class="icon">🧠</div><h3>Des décisions utiles</h3><p>Observe les menaces, garde un œil sur ton équipe et demande-toi quand avancer ou battre en retraite.</p></article>
-        <article class="feature"><div class="icon">🤝</div><h3>Jouer ensemble</h3><p>Partage les informations importantes, joue avec tes alliés et adapte-toi à la situation.</p></article>
+      <div class="section-head"><div><div class="kicker">01 — Comprendre le jeu</div><h2>Overwatch, c'est quoi ?</h2></div><p>Un jeu de tir en équipe avec des héros différents, chacun doté de capacités qui peuvent changer le cours d'un affrontement.</p></div>
+      <div class="intro-grid">
+        <article class="intro-callout"><div class="big-icon" aria-hidden="true">🌍</div><h3>Plus qu'une question de précision</h3><p>Pour réussir, il faut aussi observer la situation, choisir le bon moment pour agir, protéger ses alliés et jouer autour de l'objectif.</p></article>
+        <div class="intro-copy"><h3>Le but : faire gagner ton équipe</h3><p>Selon le mode, il faut par exemple capturer une zone, escorter un convoi ou contester un objectif. Les règles changent, mais la coordination reste essentielle.</p><p>Les héros n'ont pas tous le même style. Certains encaissent la pression, d'autres cherchent à éliminer les adversaires, tandis que les soutiens aident l'équipe à rester en combat.</p><p><strong>Le meilleur réflexe :</strong> regarde où est ton équipe, repère les dangers et réfléchis à ce que tu peux apporter à ce moment précis.</p></div>
+      </div>
+      <div class="roles-grid">
+        <article class="role-card"><div class="emoji" aria-hidden="true">🛡️</div><h3>Tank</h3><p>Ouvre des possibilités, prend de l'espace et aide l'équipe à avancer sans se faire isoler.</p></article>
+        <article class="role-card"><div class="emoji" aria-hidden="true">🎯</div><h3>Dégâts</h3><p>Met la pression sur les adversaires, choisit ses cibles et profite des occasions créées par l'équipe.</p></article>
+        <article class="role-card"><div class="emoji" aria-hidden="true">💚</div><h3>Soutien</h3><p>Soigne ou renforce ses alliés tout en gardant un œil sur sa propre sécurité et la situation.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-section" id="apropos">
+    <div class="wrap">
+      <div class="section-head"><div><div class="kicker">02 — À propos</div><h2>Qui sommes-nous ?</h2></div><p>CoachingOver est un projet indépendant qui rassemble des ressources pour aider les joueurs à mieux comprendre le jeu et à progresser étape par étape.</p></div>
+      <div class="mission"><h3>Notre objectif : rendre la progression plus simple.</h3><p>On veut proposer des explications accessibles, des conseils faciles à tester en partie et des repères pour apprendre sans se sentir perdu. Ici, l'important n'est pas de tout maîtriser d'un coup, mais d'avancer petit à petit.</p></div>
+      <div class="about-grid">
+        <article class="about-card"><div class="number">01 / APPRENDRE</div><h3>Des conseils compréhensibles</h3><p>On explique les bases sans compliquer les choses : rôles, placement, capacités et décisions en combat.</p></article>
+        <article class="about-card"><div class="number">02 / S'ENTRAÎNER</div><h3>Des objectifs concrets</h3><p>Chaque guide donne des idées à tester en jeu, pour transformer la théorie en habitudes utiles.</p></article>
+        <article class="about-card"><div class="number">03 / PROGRESSER</div><h3>À son propre rythme</h3><p>Les défaites font partie de l'apprentissage. On peut analyser une partie, retenir une leçon et réessayer.</p></article>
+        <article class="about-card"><div class="number">04 / COOPÉRER</div><h3>La victoire se construit ensemble</h3><p>La communication, l'entraide et l'adaptation sont aussi importantes que les performances individuelles.</p></article>
       </div>
     </div>
   </section>
 
   <section id="guides">
     <div class="wrap">
-      <div class="section-head"><div><div class="tag">Bibliothèque</div><h2>Les bases par héros</h2></div><p>Choisis un rôle ou recherche un héros pour afficher des conseils de départ.</p></div>
-      <input class="search" id="search" type="search" placeholder="Rechercher un héros…" aria-label="Rechercher un héros">
-      <div class="filters" role="group" aria-label="Filtrer par rôle">
-        <button class="filter active" data-filter="Tous" aria-pressed="true">Tous</button>
-        <button class="filter" data-filter="Tank" aria-pressed="false">Tank</button>
-        <button class="filter" data-filter="Dégâts" aria-pressed="false">Dégâts</button>
-        <button class="filter" data-filter="Soutien" aria-pressed="false">Soutien</button>
-      </div>
+      <div class="section-head"><div><div class="kicker">03 — Bibliothèque de héros</div><h2>Choisis ton héros.</h2></div><p>Filtre par rôle ou cherche un nom pour trouver quelques conseils de départ.</p></div>
+      <div class="library-tools"><input class="search" id="search" type="search" placeholder="Rechercher un héros…" aria-label="Rechercher un héros"><div class="filters" role="group" aria-label="Filtrer les héros par rôle"><button class="filter active" data-filter="Tous" aria-pressed="true">Tous</button><button class="filter" data-filter="Tank" aria-pressed="false">Tank</button><button class="filter" data-filter="Dégâts" aria-pressed="false">Dégâts</button><button class="filter" data-filter="Soutien" aria-pressed="false">Soutien</button></div></div>
       <div class="guides" id="guide-list">
-        <article class="guide" data-name="dva d.va dva tank méca" data-role="Tank">
-          <div class="guide-top"><div><div class="role">Tank</div><h3>D.Va</h3></div><div class="hero-symbol">🤖</div></div>
-          <div class="guide-body"><p>Protège ton équipe, conteste les hauteurs et choisis bien le moment d'engager.</p><button class="btn secondary expand" aria-expanded="false">Voir les conseils +</button><div class="detail hidden"><strong>À travailler :</strong><ul><li>Garde ta Matrice défensive pour les menaces importantes.</li><li>Vérifie où se trouvent tes soutiens avant de plonger.</li><li>Reviens vers ton équipe si ton méca est en danger.</li></ul></div></div>
-        </article>
-        <article class="guide" data-name="reinhardt rein bouclier tank" data-role="Tank">
-          <div class="guide-top"><div><div class="role">Tank</div><h3>Reinhardt</h3></div><div class="hero-symbol">🛡️</div></div>
-          <div class="guide-body"><p>Crée de l'espace pour tes alliés et choisis tes charges avec prudence.</p><button class="btn secondary expand" aria-expanded="false">Voir les conseils +</button><div class="detail hidden"><strong>À travailler :</strong><ul><li>Utilise ton bouclier pour aider l'équipe à traverser les zones dangereuses.</li><li>Évite les charges qui t'isolent des alliés.</li><li>Observe les capacités adverses avant d'utiliser ton ultime.</li></ul></div></div>
-        </article>
-        <article class="guide" data-name="soldat 76 soldier dégâts tir" data-role="Dégâts">
-          <div class="guide-top"><div><div class="role">Dégâts</div><h3>Soldat : 76</h3></div><div class="hero-symbol">🎯</div></div>
-          <div class="guide-body"><p>Travaille ta visée, utilise les couvertures et garde une position de repli.</p><button class="btn secondary expand" aria-expanded="false">Voir les conseils +</button><div class="detail hidden"><strong>À travailler :</strong><ul><li>Privilégie les tirs réguliers plutôt que de tirer sans contrôler le recul.</li><li>Place-toi près d'une couverture.</li><li>Garde ton sprint pour te replacer ou sortir d'un danger.</li></ul></div></div>
-        </article>
-        <article class="guide" data-name="ange mercy soutien soin" data-role="Soutien">
-          <div class="guide-top"><div><div class="role">Soutien</div><h3>Ange</h3></div><div class="hero-symbol">✨</div></div>
-          <div class="guide-body"><p>Reste attentive aux dangers et privilégie une position sûre pour soutenir l'équipe.</p><button class="btn secondary expand" aria-expanded="false">Voir les conseils +</button><div class="detail hidden"><strong>À travailler :</strong><ul><li>Regarde souvent autour de toi, pas seulement le joueur que tu soignes.</li><li>Alterner soin et amplification selon la situation.</li><li>Utilise ta mobilité pour rejoindre un allié en sécurité.</li></ul></div></div>
-        </article>
-        <article class="guide" data-name="lúcio lucio soutien vitesse" data-role="Soutien">
-          <div class="guide-top"><div><div class="role">Soutien</div><h3>Lúcio</h3></div><div class="hero-symbol">🎵</div></div>
-          <div class="guide-body"><p>Utilise ta mobilité pour aider l'équipe à bouger et survivre aux moments clés.</p><button class="btn secondary expand" aria-expanded="false">Voir les conseils +</button><div class="detail hidden"><strong>À travailler :</strong><ul><li>Choisis l'aura qui correspond au besoin immédiat de l'équipe.</li><li>Utilise les murs pour rester mobile et difficile à toucher.</li><li>Garde ton ultime pour contrer une menace importante.</li></ul></div></div>
-        </article>
-        <article class="guide" data-name="tracer dégâts mobilité" data-role="Dégâts">
-          <div class="guide-top"><div><div class="role">Dégâts</div><h3>Tracer</h3></div><div class="hero-symbol">💨</div></div>
-          <div class="guide-body"><p>Crée de la pression, mais garde toujours une option pour te replier.</p><button class="btn secondary expand" aria-expanded="false">Voir les conseils +</button><div class="detail hidden"><strong>À travailler :</strong><ul><li>Repère ton chemin de sortie avant d'attaquer.</li><li>Évite de dépenser toutes tes charges de transfert en même temps.</li><li>Choisis une cible accessible plutôt que de te battre seul contre tous.</li></ul></div></div>
-        </article>
+        <article class="guide" data-name="dva d.va dva tank méca" data-role="Tank"><div class="guide-top"><div><div class="role-label">Tank</div><h3>D.Va</h3></div><div class="hero-icon">🤖</div></div><div class="guide-body"><p>Protège ton équipe, conteste les hauteurs et choisis bien le moment d'engager.</p><button class="button ghost expand" aria-expanded="false">Voir les conseils +</button><div class="detail hidden"><strong>À travailler :</strong><ul><li>Garde ta Matrice défensive pour les menaces importantes.</li><li>Vérifie où se trouvent tes soutiens avant de plonger.</li><li>Reviens vers ton équipe si ton méca est en danger.</li></ul></div></div></article>
+        <article class="guide" data-name="reinhardt rein bouclier tank" data-role="Tank"><div class="guide-top"><div><div class="role-label">Tank</div><h3>Reinhardt</h3></div><div class="hero-icon">🛡️</div></div><div class="guide-body"><p>Crée de l'espace pour tes alliés et choisis tes charges avec prudence.</p><button class="button ghost expand" aria-expanded="false">Voir les conseils +</button><div class="detail hidden"><strong>À travailler :</strong><ul><li>Protège l'équipe pour l'aider à traverser les zones dangereuses.</li><li>Évite les charges qui t'isolent de tes alliés.</li><li>Observe les capacités adverses avant d'utiliser ton ultime.</li></ul></div></div></article>
+        <article class="guide" data-name="soldat 76 soldier dégâts tir" data-role="Dégâts"><div class="guide-top"><div><div class="role-label">Dégâts</div><h3>Soldat : 76</h3></div><div class="hero-icon">🎯</div></div><div class="guide-body"><p>Travaille ta visée, utilise les couvertures et garde une position de repli.</p><button class="button ghost expand" aria-expanded="false">Voir les conseils +</button><div class="detail hidden"><strong>À travailler :</strong><ul><li>Privilégie les tirs contrôlés.</li><li>Place-toi près d'une couverture.</li><li>Garde ton sprint pour te replacer ou sortir d'un danger.</li></ul></div></div></article>
+        <article class="guide" data-name="ange mercy soutien soin" data-role="Soutien"><div class="guide-top"><div><div class="role-label">Soutien</div><h3>Ange</h3></div><div class="hero-icon">✨</div></div><div class="guide-body"><p>Soutiens tes alliés tout en surveillant les dangers autour de toi.</p><button class="button ghost expand" aria-expanded="false">Voir les conseils +</button><div class="detail hidden"><strong>À travailler :</strong><ul><li>Regarde régulièrement autour de toi, pas seulement la cible soignée.</li><li>Alterne soin et amplification selon la situation.</li><li>Utilise ta mobilité pour rejoindre un allié en sécurité.</li></ul></div></div></article>
+        <article class="guide" data-name="lúcio lucio soutien vitesse" data-role="Soutien"><div class="guide-top"><div><div class="role-label">Soutien</div><h3>Lúcio</h3></div><div class="hero-icon">🎵</div></div><div class="guide-body"><p>Aide l'équipe à bouger et à survivre aux moments importants.</p><button class="button ghost expand" aria-expanded="false">Voir les conseils +</button><div class="detail hidden"><strong>À travailler :</strong><ul><li>Choisis l'aura qui répond au besoin immédiat de l'équipe.</li><li>Utilise les murs pour rester mobile.</li><li>Garde ton ultime pour contrer une menace importante.</li></ul></div></div></article>
+        <article class="guide" data-name="tracer dégâts mobilité" data-role="Dégâts"><div class="guide-top"><div><div class="role-label">Dégâts</div><h3>Tracer</h3></div><div class="hero-icon">💨</div></div><div class="guide-body"><p>Crée de la pression, mais garde toujours une option pour te replier.</p><button class="button ghost expand" aria-expanded="false">Voir les conseils +</button><div class="detail hidden"><strong>À travailler :</strong><ul><li>Repère ton chemin de sortie avant d'attaquer.</li><li>Évite de dépenser toutes tes charges de transfert en même temps.</li><li>Choisis une cible accessible plutôt que de te battre seul contre tous.</li></ul></div></div></article>
       </div>
       <p id="no-results" class="hidden" style="color:var(--muted)">Aucun héros trouvé. Essaie un autre nom ou un autre rôle.</p>
     </div>
   </section>
 
-  <section id="coaching">
+  <section class="plan-section" id="progression">
     <div class="wrap">
-      <div class="cta"><div><div class="tag">Coaching communautaire</div><h2>Un pas après l'autre.</h2><p>Tu veux t'améliorer ? Commence par une partie, un objectif et un petit bilan.</p></div><a class="btn" href="#plan">Voir le plan →</a></div>
-      <div style="height:25px"></div>
-      <div class="section-head" id="plan"><div><div class="tag">Ton plan de progression</div><h2>Trois étapes simples</h2></div></div>
-      <div class="steps">
-        <article class="step"><h3>Avant la partie</h3><p>Choisis un seul objectif concret, comme utiliser les couvertures plus souvent.</p></article>
-        <article class="step"><h3>Pendant la partie</h3><p>Concentre-toi sur cet objectif et communique les informations utiles à ton équipe.</p></article>
-        <article class="step"><h3>Après la partie</h3><p>Note une chose réussie et une chose à essayer différemment la prochaine fois.</p></article>
-      </div>
+      <div class="plan-banner"><div><div class="kicker">04 — Ton plan d'entraînement</div><h2>Une partie à la fois.</h2><p>Choisis une petite chose à améliorer et concentre-toi dessus.</p></div><a class="button" href="#guides">Choisir un héros →</a></div>
+      <div class="steps"><article class="step"><div class="step-num">ÉTAPE 01</div><h3>Avant de jouer</h3><p>Fixe un objectif précis : mieux utiliser les couvertures, par exemple.</p></article><article class="step"><div class="step-num">ÉTAPE 02</div><h3>Pendant la partie</h3><p>Concentre-toi sur cet objectif et communique les informations utiles.</p></article><article class="step"><div class="step-num">ÉTAPE 03</div><h3>Après la partie</h3><p>Repère une réussite et une chose à essayer différemment la prochaine fois.</p></article></div>
     </div>
   </section>
 </main>
-<footer><div class="wrap foot"><span><strong>CoachingOver</strong> — apprendre, s'adapter, progresser.</span><span>Site de fans non officiel, sans affiliation avec Blizzard Entertainment ou Overwatch.</span></div></footer>
+<footer><div class="wrap footer-inner"><span class="footer-brand">Coaching<span>Over</span> — apprendre, s'adapter, progresser.</span><span>Projet de fans indépendant, sans affiliation avec Blizzard Entertainment.</span></div></footer>
 <script>
-  const filters = [...document.querySelectorAll('.filter')];
-  const cards = [...document.querySelectorAll('.guide')];
-  const search = document.getElementById('search');
-  const noResults = document.getElementById('no-results');
-  let activeRole = 'Tous';
-  function updateCards(){
-    const query = search.value.trim().toLocaleLowerCase('fr');
-    let visible = 0;
-    cards.forEach(card => {
-      const matchesRole = activeRole === 'Tous' || card.dataset.role === activeRole;
-      const matchesText = card.dataset.name.toLocaleLowerCase('fr').includes(query);
-      const show = matchesRole && matchesText;
-      card.classList.toggle('hidden', !show);
-      if(show) visible++;
-    });
-    noResults.classList.toggle('hidden', visible > 0);
-  }
-  filters.forEach(button => button.addEventListener('click', () => {
-    activeRole = button.dataset.filter;
-    filters.forEach(item => {
-      const active = item === button;
-      item.classList.toggle('active', active);
-      item.setAttribute('aria-pressed', String(active));
-    });
-    updateCards();
-  }));
-  search.addEventListener('input', updateCards);
-  document.querySelectorAll('.expand').forEach(button => button.addEventListener('click', () => {
-    const detail = button.nextElementSibling;
-    const open = detail.classList.toggle('hidden') === false;
-    button.setAttribute('aria-expanded', String(open));
-    button.textContent = open ? 'Masquer les conseils −' : 'Voir les conseils +';
-  }));
+  const filters=[...document.querySelectorAll('.filter')],cards=[...document.querySelectorAll('.guide')],search=document.getElementById('search'),noResults=document.getElementById('no-results');
+  let activeRole='Tous';
+  function updateCards(){const query=search.value.trim().toLocaleLowerCase('fr');let visible=0;cards.forEach(card=>{const show=(activeRole==='Tous'||card.dataset.role===activeRole)&&card.dataset.name.toLocaleLowerCase('fr').includes(query);card.classList.toggle('hidden',!show);if(show)visible++;});noResults.classList.toggle('hidden',visible>0);}
+  filters.forEach(button=>button.addEventListener('click',()=>{activeRole=button.dataset.filter;filters.forEach(item=>{const active=item===button;item.classList.toggle('active',active);item.setAttribute('aria-pressed',String(active));});updateCards();}));
+  search.addEventListener('input',updateCards);
+  document.querySelectorAll('.expand').forEach(button=>button.addEventListener('click',()=>{const detail=button.nextElementSibling,open=detail.classList.toggle('hidden')===false;button.setAttribute('aria-expanded',String(open));button.textContent=open?'Masquer les conseils −':'Voir les conseils +';}));
 </script>
 </body>
 </html>
