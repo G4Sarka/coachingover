@@ -32,7 +32,7 @@
     <section class="stats" id="statsPanel">
       <div class="stat"><div class="stat-top"><small>COMPTES ENREGISTRÉS</small><span class="stat-icon">▤</span></div><strong id="sAccounts">0</strong><em>Comptes dans la base</em></div>
       <div class="stat"><div class="stat-top"><small>JOUEURS</small><span class="stat-icon">♙</span></div><strong id="sPlayers">0</strong><em>Utilisateurs différents</em></div>
-      <div class="stat"><div class="stat-top"><small>PARTIES JOUÉES</small><span class="stat-icon">◷</span></div><strong id="sGames">0</strong><em>Tous comptes confondus</em></div>
+      <div class="stat"><div class="stat-top"><small>TOTAL DES COMPTES</small><span class="stat-icon">▤</span></div><strong id="sGames">0</strong><em>Nombre total de comptes enregistrés</em></div>
       <div class="stat"><div class="stat-top"><small>COMPTES PRÊTS À LA VENTE</small><span class="stat-icon">✓</span></div><strong id="sWins">0</strong><em>Comptes marqués prêts</em></div>
     </section>
     <section class="overview-grid" id="overviewSection">
@@ -137,7 +137,7 @@ function fromDb(a){return {...a,updated:a.last_updated,readyForSale:Boolean(a.re
 function toDb(a){return {battletag:a.battleTag,player:a.player,rank:a.rank,division:a.division,role:a.role,games:a.games,wins:a.wins,losses:a.losses,ready_for_sale:a.readyForSale,last_updated:a.updated||new Date().toISOString().slice(0,10)}}
 async function loadAccounts(){say('Synchronisation avec la base partagée…');const {data,error}=await db.from('accounts').select('*').order('created_at',{ascending:false});if(error){say('Impossible de charger les comptes : '+error.message,true);return}accounts=(data||[]).map(fromDb);render();say('Données synchronisées · visibles par toute l’équipe')}
 async function refresh(){const {data,error}=await db.from('accounts').select('*').order('created_at',{ascending:false});if(error)throw error;accounts=(data||[]).map(fromDb);render()}
-function stats(){const players=new Set(accounts.map(a=>(a.player||'').trim().toLowerCase()).filter(Boolean));$('sAccounts').textContent=accounts.length;$('sPlayers').textContent=players.size;$('sGames').textContent=accounts.reduce((n,a)=>n+(+a.games||0),0);$('sWins').textContent=accounts.filter(a=>a.readyForSale).length}
+function stats(){const players=new Set(accounts.map(a=>(a.player||'').trim().toLowerCase()).filter(Boolean));$('sAccounts').textContent=accounts.length;$('sPlayers').textContent=players.size;$('sGames').textContent=accounts.length;$('sWins').textContent=accounts.filter(a=>a.readyForSale).length}
 function visible(){const q=$('search').value.toLowerCase(),r=$('filterRank').value,role=$('filterRole').value;return accounts.filter(a=>(!q||[a.battletag,a.player,a.rank,a.role].join(' ').toLowerCase().includes(q))&&(!r||a.rank===r)&&(!role||a.role===role))}
 function card(a){return '<article class="account-card"><h3>'+esc(a.battletag)+'</h3><p>Joueur : <b>'+esc(a.player)+'</b> · <span class="rank">'+esc(a.rank)+'</span></p><p>'+esc(a.role)+' · '+esc(a.division||'ELO non renseigné')+'</p><p>'+a.games+' parties</p><p><span class="status-ready '+(a.readyForSale?'yes':'no')+'">'+(a.readyForSale?'Compte prêt à la vente':'Compte pas encore prêt')+'</span></p><div class="actions"><button class="secondary" onclick="editAccount(\''+a.id+'\')">Modifier</button><button class="danger" onclick="deleteAccount(\''+a.id+'\')">Supprimer</button></div></article>'}
 
