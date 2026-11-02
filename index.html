@@ -18,26 +18,26 @@
   <a class="side-brand" href="#dashboard"><span class="side-logo">C</span><span>COACHING<span class="brand-accent">OVER</span><small>TEAM MANAGEMENT</small></span></a>
   <div class="side-label">WORKSPACE</div>
   <nav class="side-nav">
-    <a class="nav-link active" href="#dashboard"><span>▦</span> Dashboard</a>
-    <a class="nav-link" href="#accounts"><span>▤</span> Comptes</a>
+    <a class="nav-link active" href="#dashboard" id="navDashboard"><span>▦</span> Dashboard</a>
+    <a class="nav-link" href="#accounts" id="navAccounts"><span>▤</span> Comptes</a>
     <a class="nav-link" href="#add-account" id="navAddAccount"><span>＋</span> Ajouter un compte</a>
-    <a class="nav-link" href="#statsPanel"><span>◫</span> Statistiques</a>
+    <a class="nav-link" href="#statsPanel" id="navStats"><span>◫</span> Statistiques</a>
   </nav>
   <div class="sidebar-bottom"><div class="online-dot"></div><div><b>Base d'équipe</b><small>Synchronisation partagée</small></div></div>
 </aside>
 <main class="main-area" id="dashboard">
-  <header class="topbar"><div><div class="crumb">ESPACE ÉQUIPE <span>/</span> OVERWATCH</div><div class="topbar-title">Centre de gestion</div></div><div class="topbar-right"><span class="live-pill"><i></i> ESPACE EN LIGNE</span><div class="avatar">CO</div></div></header>
+  <header class="topbar"><div><div class="crumb">ESPACE ÉQUIPE <span>/</span> OVERWATCH</div><div class="topbar-title" id="topbarTitle">Centre de gestion</div></div><div class="topbar-right"><span class="live-pill"><i></i> ESPACE EN LIGNE</span><div class="avatar">CO</div></div></header>
   <div class="content">
-    <section class="welcome-row"><div><div class="eyebrow">APERÇU GÉNÉRAL</div><h1>Dashboard <span>équipe.</span></h1><p>Retrouve toutes les informations et les comptes Overwatch de ton équipe au même endroit.</p></div></section>
+    <section class="welcome-row" id="welcomeSection"><div><div class="eyebrow">APERÇU GÉNÉRAL</div><h1>Dashboard <span>équipe.</span></h1><p>Retrouve toutes les informations et les comptes Overwatch de ton équipe au même endroit.</p></div></section>
     <section class="stats" id="statsPanel">
       <div class="stat"><div class="stat-top"><small>COMPTES ENREGISTRÉS</small><span class="stat-icon">▤</span></div><strong id="sAccounts">0</strong><em>Comptes dans la base</em></div>
       <div class="stat"><div class="stat-top"><small>JOUEURS</small><span class="stat-icon">♙</span></div><strong id="sPlayers">0</strong><em>Utilisateurs différents</em></div>
       <div class="stat"><div class="stat-top"><small>PARTIES JOUÉES</small><span class="stat-icon">◷</span></div><strong id="sGames">0</strong><em>Tous comptes confondus</em></div>
       <div class="stat"><div class="stat-top"><small>VICTOIRES</small><span class="stat-icon">↗</span></div><strong id="sWins">0</strong><em>Tous comptes confondus</em></div>
     </section>
-    <section class="overview-grid">
+    <section class="overview-grid" id="overviewSection">
       <div class="panel overview-panel"><div class="panel-heading"><div><h2>Répartition des rangs</h2><p class="sub">Vue d'ensemble des comptes classés</p></div><span class="panel-symbol">◫</span></div><div id="rankOverview" class="rank-overview"><div class="empty">Les rangs apparaîtront ici dès l'ajout de comptes.</div></div></div>
-      <div class="panel overview-panel quick-panel"><div class="panel-heading"><div><h2>Accès rapide</h2><p class="sub">Les actions les plus utilisées</p></div><span class="panel-symbol">↗</span></div><a href="#formPanel" class="quick-action" id="quickAddAction" href="#"><span class="quick-action-icon">＋</span><span><b>Ajouter un compte</b><small>Enregistrer un nouveau compte</small></span><strong>→</strong></a><a href="#accounts" class="quick-action"><span class="quick-action-icon">▤</span><span><b>Voir les comptes</b><small>Rechercher et gérer la base</small></span><strong>→</strong></a><button type="button" class="export-action" id="exportBtn">↓ <span>Exporter la base en CSV</span></button></div>
+      <div class="panel overview-panel quick-panel"><div class="panel-heading"><div><h2>Accès rapide</h2><p class="sub">Les actions les plus utilisées</p></div><span class="panel-symbol">↗</span></div><a href="#formPanel" class="quick-action" id="quickAddAction" href="#"><span class="quick-action-icon">＋</span><span><b>Ajouter un compte</b><small>Enregistrer un nouveau compte</small></span><strong>→</strong></a><a href="#accounts" class="quick-action" id="quickViewAccounts"><span class="quick-action-icon">▤</span><span><b>Voir les comptes</b><small>Rechercher et gérer la base</small></span><strong>→</strong></a><button type="button" class="export-action" id="exportBtn">↓ <span>Exporter la base en CSV</span></button></div>
     </section>
     
 <div class="modal-backdrop" id="accountModal" aria-hidden="true">
@@ -57,7 +57,7 @@
   </section>
 </div>
 <main class="layout">
-      <section class="panel accounts-panel" id="accounts"><div class="panel-heading"><div><h2>Comptes de l'équipe</h2><p class="sub">Base commune · modifications partagées</p></div><span class="panel-symbol">▤</span></div>
+      <section class="panel accounts-panel" id="accounts"><div class="accounts-titlebar"><div><div class="eyebrow">BASE DE DONNÉES · OVERWATCH</div><h2>Comptes de l’équipe</h2><p class="sub" id="accountsSubtitle">Base commune · modifications partagées</p></div><div class="accounts-tools"><span class="count-pill" id="accountsCount">0 compte</span><button type="button" class="secondary" id="accountsExport">↓ Exporter CSV</button></div></div>
         <div class="toolbar"><input class="search" id="search" placeholder="⌕  Rechercher un compte ou un joueur…"><select id="filterRank"><option value="">Tous les rangs</option><option>Non classé</option><option>Bronze</option><option>Argent</option><option>Or</option><option>Platine</option><option>Diamant</option><option>Maître</option><option>Grand-maître</option><option>Champion</option></select><select id="filterRole"><option value="">Tous les rôles</option><option>Tank</option><option>DPS</option><option>Support</option><option>Flex</option></select></div>
         <div class="tablewrap"><table><thead><tr><th>Compte</th><th>Joueur</th><th>Rang</th><th>Rôle</th><th>Parties</th><th>V / D</th><th>Actions</th></tr></thead><tbody id="tableBody"></tbody></table></div>
         <div class="mobilecards" id="mobileCards"></div><div class="empty" id="empty">Aucun compte pour le moment. Ajoute ton premier compte avec le formulaire.</div>
@@ -87,6 +87,23 @@ body{background:#090c12;color:var(--txt);font:14px/1.5 Inter,system-ui,Arial,san
 @media(max-width:1100px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:760px){.app-shell{grid-template-columns:1fr}.sidebar{position:relative;height:auto;padding:13px 15px;border-right:0;border-bottom:1px solid #202b3b}.side-brand{padding:0 4px 12px}.side-label,.sidebar-bottom{display:none}.side-nav{display:flex;overflow:auto;gap:5px}.nav-link{white-space:nowrap;padding:9px 10px;font-size:10px}.topbar{height:61px;padding:0 17px}.content{padding:23px 16px}.overview-grid{grid-template-columns:1fr}.welcome-row h1{font-size:27px}}
 @media(max-width:540px){.content{padding:19px 12px}.topbar-right .live-pill{display:none}.welcome-row{align-items:flex-start}.welcome-row p{max-width:260px}.quick-add{padding:10px}.quick-add span{display:none}.stats{gap:8px}.stat{padding:12px}.stat strong{font-size:24px}.stat small{font-size:8px}.rank-overview{grid-template-columns:repeat(2,minmax(0,1fr))}.panel{padding:14px}.tablewrap{display:none}.mobilecards{display:grid;gap:9px}.account-card{background:#0d141f;border:1px solid var(--line);border-radius:10px;padding:12px}.account-card h3{margin:0 0 4px;font-size:12px}.account-card p{margin:4px 0;color:var(--muted);font-size:10px}.account-card .actions{margin-top:9px}}
+
+/* Vue dédiée à la base de comptes */
+.accounts-titlebar{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:14px;padding-bottom:15px;border-bottom:1px solid #293448}
+.accounts-titlebar h2{font-size:21px;margin:4px 0}.accounts-titlebar .sub{margin:0}
+.accounts-tools{display:flex;align-items:center;gap:10px}.count-pill{border:1px solid #58402f;background:#2a211c;color:#ffb47f;padding:7px 11px;border-radius:20px;font-size:10px;font-weight:900;white-space:nowrap}
+.accounts-panel .toolbar{margin:15px 0}.accounts-panel .tablewrap{border-radius:11px;max-height:calc(100vh - 290px);overflow:auto}
+.accounts-panel table{min-width:780px}.accounts-panel th{position:sticky;top:0;z-index:2;padding:14px 12px;background:#1a2433}
+.accounts-panel td{padding:15px 12px;font-size:11px}.accounts-panel tbody tr{transition:background .15s}.accounts-panel tbody tr:nth-child(even){background:#121b28}.accounts-panel tbody tr:hover{background:#202c3d}
+.accounts-panel td:first-child strong{font-size:12px}.accounts-panel .rank{min-width:75px;text-align:center}
+body.accounts-view .welcome-row,body.accounts-view #statsPanel,body.accounts-view #overviewSection{display:none}
+body.accounts-view .content{max-width:none;padding-top:25px}
+body.accounts-view .layout{margin-top:0}
+body.accounts-view .accounts-panel{min-height:calc(100vh - 145px);padding:25px}
+body.accounts-view .accounts-panel .tablewrap{max-height:calc(100vh - 280px)}
+body.accounts-view footer{display:none}
+@media(max-width:760px){.accounts-titlebar{align-items:flex-start;flex-direction:column}.accounts-tools{width:100%;justify-content:space-between}.accounts-panel .tablewrap{max-height:none}body.accounts-view .accounts-panel{padding:14px;min-height:0}body.accounts-view .accounts-panel .tablewrap{display:none}body.accounts-view .accounts-panel .mobilecards{display:grid}}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -98,6 +115,12 @@ let accounts=[];let editingId=null;let busy=false;
 const $=id=>document.getElementById(id);
 $('updated').value=new Date().toISOString().slice(0,10);
 const modal=$('accountModal');
+function setPage(page){document.body.classList.toggle('accounts-view',page==='accounts');document.querySelectorAll('.nav-link').forEach(link=>link.classList.remove('active'));if(page==='accounts')$('navAccounts').classList.add('active');else $('navDashboard').classList.add('active');$('topbarTitle').textContent=page==='accounts'?'Gestion des comptes':'Centre de gestion';window.scrollTo({top:0,behavior:'smooth'});}
+$('navDashboard').addEventListener('click',e=>{e.preventDefault();setPage('dashboard')});
+$('navAccounts').addEventListener('click',e=>{e.preventDefault();setPage('accounts')});
+$('quickViewAccounts').addEventListener('click',e=>{e.preventDefault();setPage('accounts')});
+$('navStats').addEventListener('click',e=>{e.preventDefault();setPage('dashboard');setTimeout(()=>$('statsPanel').scrollIntoView({behavior:'smooth',block:'start'}),80)});
+$('accountsExport').addEventListener('click',()=>$('exportBtn').click());
 function openModal(){modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(()=>$('battleTag').focus(),60)}
 function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';}
 $('quickAddAction').addEventListener('click',e=>{e.preventDefault();resetForm();say('');openModal()});
@@ -118,7 +141,7 @@ function visible(){const q=$('search').value.toLowerCase(),r=$('filterRank').val
 function card(a){return '<article class="account-card"><h3>'+esc(a.battletag)+'</h3><p>Joueur : <b>'+esc(a.player)+'</b> · <span class="rank">'+esc(a.rank)+'</span></p><p>'+esc(a.role)+' · '+esc(a.division||'ELO non renseigné')+'</p><p>'+a.games+' parties · '+a.wins+' victoires / '+a.losses+' défaites</p><div class="actions"><button class="secondary" onclick="editAccount(\''+a.id+'\')">Modifier</button><button class="danger" onclick="deleteAccount(\''+a.id+'\')">Supprimer</button></div></article>'}
 
 function renderRankOverview(){const names=['Champion','Grand-maître','Maître','Diamant','Platine','Or','Argent','Bronze','Non classé'];const counts=names.map(name=>({name,count:accounts.filter(a=>a.rank===name).length}));const max=Math.max(1,...counts.map(x=>x.count));$('rankOverview').innerHTML=counts.map(x=>'<div class="rank-tile"><b>'+esc(x.name)+'</b><small>'+x.count+' compte'+(x.count>1?'s':'')+'</small><div class="rank-track"><i style="width:'+(x.count/max*100)+'%"></i></div></div>').join('')}
-function render(){stats();renderRankOverview();const rows=visible();$('tableBody').innerHTML=rows.map(a=>'<tr><td><strong>'+esc(a.battletag)+'</strong><small>'+esc(a.division||'ELO non renseigné')+'</small></td><td>'+esc(a.player)+'</td><td><span class="rank">'+esc(a.rank)+'</span></td><td>'+esc(a.role)+'</td><td>'+a.games+'</td><td>'+a.wins+' / '+a.losses+'</td><td><div class="actions"><button class="secondary" onclick="editAccount(\''+a.id+'\')">Modifier</button><button class="danger" onclick="deleteAccount(\''+a.id+'\')">Supprimer</button></div></td></tr>').join('');$('mobileCards').innerHTML=rows.map(card).join('');$('empty').style.display=rows.length?'none':'block'}
+function render(){stats();renderRankOverview();$('accountsCount').textContent=accounts.length+' compte'+(accounts.length>1?'s':'');$('accountsSubtitle').textContent=visible().length+' affiché(s) sur '+accounts.length+' · Base commune synchronisée';const rows=visible();$('tableBody').innerHTML=rows.map(a=>'<tr><td><strong>'+esc(a.battletag)+'</strong><small>'+esc(a.division||'ELO non renseigné')+'</small></td><td>'+esc(a.player)+'</td><td><span class="rank">'+esc(a.rank)+'</span></td><td>'+esc(a.role)+'</td><td>'+a.games+'</td><td>'+a.wins+' / '+a.losses+'</td><td><div class="actions"><button class="secondary" onclick="editAccount(\''+a.id+'\')">Modifier</button><button class="danger" onclick="deleteAccount(\''+a.id+'\')">Supprimer</button></div></td></tr>').join('');$('mobileCards').innerHTML=rows.map(card).join('');$('empty').style.display=rows.length?'none':'block'}
 function resetForm(){editingId=null;$('accountForm').reset();$('games').value=0;$('wins').value=0;$('losses').value=0;$('updated').value=new Date().toISOString().slice(0,10);$('formTitle').textContent='Ajouter un compte';$('saveBtn').textContent='+ Ajouter le compte';$('cancelBtn').hidden=true}
 $('accountForm').addEventListener('submit',async e=>{e.preventDefault();if(busy)return;const games=+$('games').value,wins=+$('wins').value,losses=+$('losses').value;if(wins+losses>games){say('Les victoires et défaites ne peuvent pas dépasser le nombre de parties.',true);return}const item={battleTag:$('battleTag').value.trim(),player:$('player').value.trim(),rank:$('rank').value,division:$('division').value.trim(),role:$('role').value,games,wins,losses,updated:$('updated').value};if(!item.battleTag||!item.player){say('Le pseudo et le joueur sont obligatoires.',true);return}busy=true;$('saveBtn').disabled=true;const wasEditing=Boolean(editingId);try{let result;if(wasEditing)result=await db.from('accounts').update(toDb(item)).eq('id',editingId);else result=await db.from('accounts').insert(toDb(item));if(result.error)throw result.error;await refresh();resetForm();closeModal();say(wasEditing?'Compte modifié pour toute l’équipe.':'Compte ajouté pour toute l’équipe.')}catch(err){say('Enregistrement refusé : '+err.message,true)}finally{busy=false;$('saveBtn').disabled=false}});
 window.editAccount=id=>{const a=accounts.find(x=>x.id===id);if(!a)return;editingId=id;$('battleTag').value=a.battletag;$('player').value=a.player;$('rank').value=a.rank;$('division').value=a.division||'';$('role').value=a.role;$('games').value=a.games;$('wins').value=a.wins;$('losses').value=a.losses;$('updated').value=a.updated||'';$('formTitle').textContent='Modifier le compte';$('saveBtn').textContent='Enregistrer les modifications';$('cancelBtn').hidden=false;say('');openModal()};
