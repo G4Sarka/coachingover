@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Coachingover — Statistiques</title>
+<style>
+:root{color-scheme:dark;--bg:#0b0d12;--panel:#141923;--panel2:#191f2b;--line:#252e3d;--muted:#929bad;--text:#f4f6fb;--accent:#ff8a32;--green:#42d39b;--blue:#69a7ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 85% 0%,#24202a 0,transparent 35%),var(--bg);color:var(--text);font:15px Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+.wrap{max-width:1240px;margin:auto;padding:30px 22px 60px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}.brand{display:flex;align-items:center;gap:12px}.mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#ffb05c,#f36b22);display:grid;place-items:center;color:#17120e;font-weight:900;font-size:20px}.eyebrow{color:var(--accent);font-size:11px;font-weight:800;letter-spacing:2px}.brand h1{font-size:20px;margin:2px 0}.sub{color:var(--muted);font-size:13px}.pill{border:1px solid var(--line);background:var(--panel);padding:10px 14px;border-radius:12px;color:var(--muted);font-size:12px}
+h2{font-size:25px;margin:0 0 7px}.intro{display:flex;justify-content:space-between;align-items:end;gap:18px;margin:26px 0 22px}.intro p{margin:0;color:var(--muted)}.filters{display:flex;gap:8px;flex-wrap:wrap}select{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:linear-gradient(145deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:17px;padding:18px;min-width:0}.metric-label{color:var(--muted);font-size:13px}.metric{font-size:29px;font-weight:800;letter-spacing:-1px;margin:10px 0 5px}.change{font-size:12px;color:var(--green)}.metric-note{color:var(--muted);font-size:12px}
+.content{display:grid;grid-template-columns:1.6fr 1fr;gap:14px;margin-top:14px}.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}.card h3{font-size:15px;margin:0}.legend{color:var(--muted);font-size:12px}.chart{height:220px;width:100%;display:block}.chart text{fill:#8993a5;font-size:10px}.chart .gridline{stroke:#2a3341;stroke-width:1;stroke-dasharray:3 5}.chart .area{fill:url(#area)}.chart .line{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.chart .dot{fill:var(--accent);stroke:#171c25;stroke-width:3}
+.rank{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.rank:last-child{border:0}.avatar{width:34px;height:34px;border-radius:11px;background:#293447;display:grid;place-items:center;font-weight:800;color:#dce6f6}.rank-name{flex:1;font-weight:650}.rank small{display:block;color:var(--muted);font-weight:400;margin-top:3px}.score{font-weight:800}.bar{height:5px;background:#293241;border-radius:9px;margin-top:7px;overflow:hidden}.bar span{display:block;height:100%;background:var(--accent);border-radius:9px}
+.bottom{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.stat-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);color:var(--muted)}.stat-row:last-child{border:0}.stat-row strong{color:var(--text)}.empty{padding:20px;text-align:center;color:var(--muted);font-size:13px}
+footer{margin-top:25px;color:#737e90;font-size:11px;text-align:center}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.content,.bottom{grid-template-columns:1fr}.intro{align-items:start;flex-direction:column}}
+@media(max-width:480px){.wrap{padding:20px 14px}.grid{gap:9px}.card{padding:14px}.metric{font-size:24px}.top{align-items:flex-start}.pill{display:none}}
+</style>
+</head>
+<body><main class="wrap">
+<header class="top"><div class="brand"><div class="mark">C</div><div><div class="eyebrow">COACHINGOVER</div><h1>Centre de statistiques</h1></div></div><div class="pill">NOUVEAU PROJET · VERSION DÉMO</div></header>
+<section class="intro"><div><h2>Vue d'ensemble</h2><p>Analyse des performances et suivi de progression.</p></div><div class="filters"><select id="period" aria-label="Période"><option value="7">7 derniers jours</option><option value="30" selected>30 derniers jours</option><option value="90">90 derniers jours</option></select><select id="player" aria-label="Joueur"><option value="all">Tous les joueurs</option><option>Manu</option><option>Marquie</option><option>Wartexe</option></select></div></section>
+<section class="grid">
+<div class="card"><div class="metric-label">Sessions réalisées</div><div class="metric" id="sessions">128</div><div class="change">↗ +12,4 %</div><div class="metric-note">par rapport à la période précédente</div></div>
+<div class="card"><div class="metric-label">Taux de réussite</div><div class="metric" id="success">74,2 %</div><div class="change">↗ +3,8 %</div><div class="metric-note">moyenne de la période</div></div>
+<div class="card"><div class="metric-label">Heures suivies</div><div class="metric" id="hours">86 h</div><div class="change">↗ +8,1 %</div><div class="metric-note">temps total enregistré</div></div>
+<div class="card"><div class="metric-label">Progression moyenne</div><div class="metric" id="progress">+16,5 %</div><div class="change">↗ En progression</div><div class="metric-note">indice de performance</div></div>
+</section>
+<section class="content">
+<div class="card"><div class="card-head"><h3>Évolution des performances</h3><span class="legend">Indice moyen</span></div>
+<svg class="chart" viewBox="0 0 620 230" preserveAspectRatio="none" role="img" aria-label="Courbe de progression"><defs><linearGradient id="area" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ff8a32" stop-opacity=".28"/><stop offset="1" stop-color="#ff8a32" stop-opacity="0"/></linearGradient></defs>
+<g><path class="gridline" d="M38 25H605 M38 75H605 M38 125H605 M38 175H605"/><text x="4" y="28">100</text><text x="10" y="78">75</text><text x="10" y="128">50</text><text x="10" y="178">25</text><text x="38" y="215">S1</text><text x="180" y="215">S2</text><text x="322" y="215">S3</text><text x="464" y="215">S4</text><text x="590" y="215">S5</text></g>
+<path class="area" d="M38 145 C85 135 105 155 150 120 S235 115 275 100 S360 125 405 78 S505 85 605 35 L605 190 L38 190Z"/>
+<path class="line" d="M38 145 C85 135 105 155 150 120 S235 115 275 100 S360 125 405 78 S505 85 605 35"/><circle class="dot" cx="605" cy="35" r="5"/></svg></div>
+<div class="card"><div class="card-head"><h3>Classement des joueurs</h3><span class="legend">Indice</span></div><div id="ranking">
+<div class="rank"><div class="avatar">M</div><div class="rank-name">Manu<small>Régularité élevée</small><div class="bar"><span style="width:88%"></span></div></div><div class="score">88</div></div>
+<div class="rank"><div class="avatar">M</div><div class="rank-name">Marquie<small>Progression constante</small><div class="bar"><span style="width:79%"></span></div></div><div class="score">79</div></div>
+<div class="rank"><div class="avatar">W</div><div class="rank-name">Wartexe<small>En développement</small><div class="bar"><span style="width:71%"></span></div></div><div class="score">71</div></div>
+</div></div></section>
+<section class="bottom">
+<div class="card"><div class="card-head"><h3>Répartition des résultats</h3><span class="legend">Données démo</span></div><div class="stat-row"><span>Réussites</span><strong>74,2 %</strong></div><div class="stat-row"><span>Résultats neutres</span><strong>15,3 %</strong></div><div class="stat-row"><span>À retravailler</span><strong>10,5 %</strong></div></div>
+<div class="card"><div class="card-head"><h3>Activité récente</h3><span class="legend">Exemple</span></div><div class="stat-row"><span>Sessions cette semaine</span><strong>18</strong></div><div class="stat-row"><span>Meilleure progression</span><strong>+9,2 %</strong></div><div class="stat-row"><span>Joueur le plus actif</span><strong>Manu</strong></div></div>
+</section>
+<footer>Les chiffres affichés sont des exemples fictifs. Aucune donnée réelle n'est encore connectée.</footer>
+</main>
+<script>
+const period=document.getElementById('period'),player=document.getElementById('player');
+function update(){const p=Number(period.value),who=player.value;const mult=p===7?.34:p===90?2.7:1;const factor=who==='all'?1:who==='Manu'?0.38:who==='Marquie'?0.34:0.28;
+document.getElementById('sessions').textContent=Math.round(128*mult*factor);
+document.getElementById('success').textContent=(who==='Manu'?78.4:who==='Marquie'?73.1:who==='Wartexe'?69.8:74.2).toFixed(1).replace('.',',')+' %';
+document.getElementById('hours').textContent=Math.round(86*mult*factor)+' h';
+document.getElementById('progress').textContent='+'+((who==='Manu'?19.2:who==='Marquie'?16.1:who==='Wartexe'?13.4:16.5)* (p===7?.55:p===90?1.35:1)).toFixed(1).replace('.',',')+' %';
+}
+period.addEventListener('change',update);player.addEventListener('change',update);
+</script></body></html>
