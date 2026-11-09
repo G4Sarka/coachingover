@@ -13,6 +13,15 @@
 .teams{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.team{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}.team-icon{width:42px;height:42px;border-radius:12px;background:#293447;color:#ffb05c;display:grid;place-items:center;font-weight:900;font-size:17px;flex-shrink:0}.team-info{flex:1;min-width:0}.team-name{font-weight:750;overflow-wrap:anywhere}.team-meta{color:var(--muted);font-size:12px;margin-top:5px}.roster{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.player{display:flex;align-items:center;gap:6px;padding:5px 8px 5px 5px;border:1px solid var(--line);background:#10151e;border-radius:9px;font-size:12px;color:var(--text)}.player img,.player-avatar{width:23px;height:23px;border-radius:50%;object-fit:cover}.player-avatar{display:grid;place-items:center;background:#354157;color:#fff;font-weight:800}.status{font-size:11px;color:var(--green);border:1px solid #28664f;background:#153629;padding:5px 8px;border-radius:20px;white-space:nowrap}
 .note{margin-top:18px;padding:15px 17px;border:1px solid var(--line);border-radius:13px;color:var(--muted);font-size:13px;line-height:1.5;background:#10151e}footer{margin-top:28px;color:#737e90;font-size:11px;text-align:center}
 @media(max-width:700px){.teams{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.top{align-items:flex-start}.pill{font-size:10px}}
+
+.team{cursor:pointer;transition:border-color .18s,transform .18s}.team:hover{border-color:var(--accent);transform:translateY(-2px)}
+.modal-backdrop{position:fixed;inset:0;background:#05070bdc;backdrop-filter:blur(7px);z-index:20;display:none;align-items:center;justify-content:center;padding:22px}.modal-backdrop.open{display:flex}
+.modal{position:relative;width:min(940px,100%);max-height:90vh;overflow:auto;background:#111722;border:1px solid #354052;border-radius:20px;padding:26px;box-shadow:0 25px 90px #000b}
+.modal.player-modal{width:min(520px,100%);text-align:center}.close{position:absolute;right:17px;top:15px;border:1px solid var(--line);background:#202938;color:var(--text);border-radius:10px;width:36px;height:36px;font-size:20px;cursor:pointer}.modal-kicker{font-size:11px;color:var(--accent);font-weight:800;letter-spacing:1.7px;text-transform:uppercase}.modal h2{margin:7px 45px 5px 0}.modal-sub{color:var(--muted);font-size:13px;margin-bottom:22px}
+.modal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}.data-card{background:#1a2230;border:1px solid var(--line);border-radius:13px;padding:15px}.data-card strong{display:block;font-size:20px;margin-top:7px}.data-card span{color:var(--muted);font-size:12px}
+.modal-section{margin-top:22px}.modal-section h3{font-size:15px;margin:0 0 12px}.modal-roster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.roster-button{display:flex;align-items:center;gap:11px;text-align:left;background:#1a2230;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:10px;cursor:pointer}.roster-button:hover{border-color:var(--accent)}.roster-button img,.roster-button .player-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0}.roster-button small{display:block;color:var(--muted);margin-top:3px}.pending{color:var(--muted);font-size:13px;background:#1a2230;border:1px dashed #3a4659;border-radius:12px;padding:14px;line-height:1.5}
+.player-big-avatar{width:76px;height:76px;border-radius:50%;object-fit:cover;margin:6px auto 13px;display:block;border:2px solid var(--accent)}.player-big-initial{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;margin:6px auto 13px;background:#354157;font-size:27px;font-weight:800}.player-modal h2{margin:0}.player-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:left;margin-top:20px}.player-stats .data-card strong{font-size:16px}
+@media(max-width:650px){.modal{padding:22px 16px}.modal-grid{grid-template-columns:1fr}.modal-roster{grid-template-columns:1fr}.player-stats{grid-template-columns:1fr}.modal-backdrop{padding:10px}}
 </style>
 </head>
 <body><main class="wrap">
@@ -33,4 +42,89 @@
 </section>
 <div class="note">Les captures fournies affichent les noms des équipes et le nombre de joueurs, mais pas les pseudos individuels. Les effectifs sont donc indiqués sans inventer de noms. Envoie les pages de composition des équipes pour ajouter chaque joueur.</div>
 <footer>Source : capture de la liste des participants du tournoi FACEIT fournie dans la conversation.</footer>
-</main></body></html>
+
+<div class="modal-backdrop" id="teamBackdrop" role="dialog" aria-modal="true" aria-labelledby="teamTitle">
+ <section class="modal"><button class="close" type="button" data-close="team" aria-label="Fermer">×</button>
+  <div class="modal-kicker">Fiche équipe · Goud Lan Third Edition</div><h2 id="teamTitle"></h2><div class="modal-sub" id="teamSubtitle"></div>
+  <div class="modal-grid">
+   <div class="data-card"><span>Matchs joués</span><strong>À renseigner</strong></div>
+   <div class="data-card"><span>Victoires / défaites</span><strong>À renseigner</strong></div>
+   <div class="data-card"><span>Maps jouées</span><strong>À renseigner</strong></div>
+  </div>
+  <div class="modal-section"><h3>Roster — clique sur un joueur</h3><div class="modal-roster" id="teamRoster"></div></div>
+  <div class="modal-section"><h3>Maps jouées</h3><div class="pending">Les maps et leurs résultats seront affichés ici dès que les données des matchs seront disponibles.</div></div>
+  <div class="modal-section"><h3>Bans / picks</h3><div class="pending">Historique des bans et picks non renseigné pour le moment.</div></div>
+ </section>
+</div>
+<div class="modal-backdrop" id="playerBackdrop" role="dialog" aria-modal="true" aria-labelledby="playerTitle">
+ <section class="modal player-modal"><button class="close" type="button" data-close="player" aria-label="Fermer">×</button>
+  <div class="modal-kicker">Fiche joueur</div><div id="playerAvatar"></div><h2 id="playerTitle"></h2><div class="modal-sub" id="playerTeam"></div>
+  <div class="player-stats">
+   <div class="data-card"><span>Personnage / agent le plus joué</span><strong>À renseigner</strong></div>
+   <div class="data-card"><span>Nombre de parties</span><strong>À renseigner</strong></div>
+   <div class="data-card"><span>Temps de jeu</span><strong>À renseigner</strong></div>
+   <div class="data-card"><span>Statistiques individuelles</span><strong>À renseigner</strong></div>
+  </div>
+  <p class="pending" style="margin-top:16px">Les statistiques personnelles et les personnages favoris ne sont pas visibles dans la liste d’inscription. Elles seront ajoutées avec les profils ou résultats du joueur.</p>
+ </section>
+</div>
+<script>
+(function(){
+ const teamBackdrop=document.getElementById('teamBackdrop');
+ const playerBackdrop=document.getElementById('playerBackdrop');
+ const teamTitle=document.getElementById('teamTitle');
+ const teamSubtitle=document.getElementById('teamSubtitle');
+ const teamRoster=document.getElementById('teamRoster');
+ const playerTitle=document.getElementById('playerTitle');
+ const playerTeam=document.getElementById('playerTeam');
+ const playerAvatar=document.getElementById('playerAvatar');
+ const knownRoster={
+  'Eclater au Sawl':[
+   {name:'SawlFr',img:'https://distribution.faceit-cdn.net/images/de3532d0-9f0b-4dc7-abd8-ce86d2da6902.jpg'},
+   {name:'CaptenErwan',img:'https://distribution.faceit-cdn.net/images/8a39ec1b-e200-45fa-990d-7f9e6a9fbb08.jpg'},
+   {name:'Hiwatara',img:'https://distribution.faceit-cdn.net/images/6dcc9b6b-373a-42dd-976a-7e49b870321b.jpg'},
+   {name:'lix_ow',img:'https://distribution.faceit-cdn.net/images/7b7b75ae-9ed5-40cc-a46e-65fcdd70f891.jpg'},
+   {name:'MaiSuuu',img:''}
+  ]
+ };
+ function openTeam(card){
+  const name=card.querySelector('.team-name').textContent.trim();
+  const count=card.querySelector('.team-meta')?.textContent.trim()||'Effectif non précisé';
+  teamTitle.textContent=name;teamSubtitle.textContent=count+' · Tournoi FACEIT';
+  teamRoster.innerHTML='';
+  const players=knownRoster[name]||[];
+  if(players.length){
+   players.forEach(p=>{
+    const b=document.createElement('button');b.type='button';b.className='roster-button';
+    const avatar=p.img?'<img src="'+p.img+'" alt="">':'<span class="player-avatar">'+p.name.charAt(0).toUpperCase()+'</span>';
+    b.innerHTML=avatar+'<span><b></b><small>Ouvrir la fiche joueur</small></span>';
+    b.querySelector('b').textContent=p.name;
+    b.addEventListener('click',()=>openPlayer(p,name));teamRoster.appendChild(b);
+   });
+  }else{
+   const note=document.createElement('div');note.className='pending';note.textContent='Les pseudos des joueurs de cette équipe ne sont pas encore renseignés. Envoie sa composition pour rendre les fiches joueurs accessibles.';teamRoster.appendChild(note);
+  }
+  teamBackdrop.classList.add('open');document.body.style.overflow='hidden';
+ }
+ function openPlayer(p,team){
+  playerTitle.textContent=p.name;playerTeam.textContent=team;
+  playerAvatar.innerHTML=p.img?'<img class="player-big-avatar" src="'+p.img+'" alt="">':'<div class="player-big-initial">'+p.name.charAt(0).toUpperCase()+'</div>';
+  playerBackdrop.classList.add('open');
+ }
+ function close(which){
+  (which==='team'?teamBackdrop:playerBackdrop).classList.remove('open');
+  if(!teamBackdrop.classList.contains('open')&&!playerBackdrop.classList.contains('open'))document.body.style.overflow='';
+ }
+ document.querySelectorAll('.team').forEach(card=>{
+  card.setAttribute('tabindex','0');card.setAttribute('role','button');
+  card.setAttribute('aria-label','Ouvrir la fiche de '+card.querySelector('.team-name').textContent.trim());
+  card.addEventListener('click',()=>openTeam(card));
+  card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openTeam(card)}});
+ });
+ document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>close(b.dataset.close)));
+ teamBackdrop.addEventListener('click',e=>{if(e.target===teamBackdrop)close('team')});
+ playerBackdrop.addEventListener('click',e=>{if(e.target===playerBackdrop)close('player')});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(playerBackdrop.classList.contains('open'))close('player');else if(teamBackdrop.classList.contains('open'))close('team')}});
+})();
+</script>
+</body></html>
