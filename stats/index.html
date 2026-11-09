@@ -22,6 +22,25 @@
 .modal-section{margin-top:22px}.modal-section h3{font-size:15px;margin:0 0 12px}.modal-roster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.roster-button{display:flex;align-items:center;gap:11px;text-align:left;background:#1a2230;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:10px;cursor:pointer}.roster-button:hover{border-color:var(--accent)}.roster-button img,.roster-button .player-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0}.roster-button small{display:block;color:var(--muted);margin-top:3px}.pending{color:var(--muted);font-size:13px;background:#1a2230;border:1px dashed #3a4659;border-radius:12px;padding:14px;line-height:1.5}
 .player-big-avatar{width:76px;height:76px;border-radius:50%;object-fit:cover;margin:6px auto 13px;display:block;border:2px solid var(--accent)}.player-big-initial{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;margin:6px auto 13px;background:#354157;font-size:27px;font-weight:800}.player-modal h2{margin:0}.player-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:left;margin-top:20px}.player-stats .data-card strong{font-size:16px}
 @media(max-width:650px){.modal{padding:22px 16px}.modal-grid{grid-template-columns:1fr}.modal-roster{grid-template-columns:1fr}.player-stats{grid-template-columns:1fr}.modal-backdrop{padding:10px}}
+
+/* Fiche équipe plein écran */
+#teamBackdrop{padding:0;align-items:stretch;justify-content:stretch}
+#teamBackdrop .team-page{width:100vw;height:100vh;max-height:100vh;max-width:none;border:0;border-radius:0;padding:0;overflow:hidden;display:grid;grid-template-columns:260px minmax(0,1fr);background:#0d121b}
+.team-sidebar{background:#111925;border-right:1px solid var(--line);padding:26px 17px;overflow:auto}
+.team-sidebar h3{font-size:14px;margin:0 0 15px}.team-sidebar .modal-kicker{margin-bottom:7px}
+#teamRoster{display:flex;flex-direction:column;gap:9px}
+#teamRoster .roster-button{width:100%;min-height:62px}
+.team-main{padding:32px clamp(18px,4vw,54px);overflow:auto;position:relative}
+.team-main-head{padding-right:48px;margin-bottom:25px}.team-main-head h2{font-size:clamp(25px,3vw,38px);margin:6px 0}.team-main-head .modal-sub{margin:0}
+.team-main .modal-grid{margin:0 0 24px}
+.stats-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.stats-panel{background:#141d2a;border:1px solid var(--line);border-radius:16px;padding:20px;min-width:0}
+.stats-panel h3{margin:0 0 5px;font-size:16px}.stats-panel>p{margin:0 0 17px;color:var(--muted);font-size:12px}
+.top-line{display:grid;grid-template-columns:24px minmax(0,1fr) auto;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.top-line:last-child{border:0}.top-number{color:var(--accent);font-weight:800}.top-name{font-size:13px;font-weight:650}.top-value{color:var(--muted);font-size:12px}.top-track{height:5px;background:#293446;border-radius:10px;margin-top:7px;overflow:hidden}.top-track i{display:block;height:100%;width:0;background:var(--accent);border-radius:10px}
+.stats-empty{font-size:12px;color:var(--muted);line-height:1.5;padding:10px 0 2px}
+@media(max-width:760px){#teamBackdrop .team-page{grid-template-columns:190px minmax(0,1fr)}.team-sidebar{padding:20px 10px}.team-main{padding:24px 15px}.stats-columns{grid-template-columns:1fr}}
+@media(max-width:540px){#teamBackdrop .team-page{grid-template-columns:135px minmax(0,1fr)}.team-sidebar{padding:18px 8px}.team-sidebar h3{font-size:12px}.team-main{padding:20px 12px}.team-main .modal-grid{grid-template-columns:1fr}.team-sidebar .roster-button{padding:8px;gap:7px}.team-sidebar .roster-button img,.team-sidebar .roster-button .player-avatar{width:28px;height:28px}.team-sidebar .roster-button small{font-size:10px}}
 </style>
 </head>
 <body><main class="wrap">
@@ -44,16 +63,31 @@
 <footer>Source : capture de la liste des participants du tournoi FACEIT fournie dans la conversation.</footer>
 
 <div class="modal-backdrop" id="teamBackdrop" role="dialog" aria-modal="true" aria-labelledby="teamTitle">
- <section class="modal"><button class="close" type="button" data-close="team" aria-label="Fermer">×</button>
-  <div class="modal-kicker">Fiche équipe · Goud Lan Third Edition</div><h2 id="teamTitle"></h2><div class="modal-sub" id="teamSubtitle"></div>
-  <div class="modal-grid">
-   <div class="data-card"><span>Matchs joués</span><strong>À renseigner</strong></div>
-   <div class="data-card"><span>Victoires / défaites</span><strong>À renseigner</strong></div>
-   <div class="data-card"><span>Maps jouées</span><strong>À renseigner</strong></div>
+ <section class="modal team-page">
+  <aside class="team-sidebar"><div class="modal-kicker">Roster</div><h3>Joueurs · sélectionner</h3><div id="teamRoster"></div></aside>
+  <div class="team-main">
+   <button class="close" type="button" data-close="team" aria-label="Fermer">×</button>
+   <header class="team-main-head"><div class="modal-kicker">Fiche équipe · Goud Lan Third Edition</div><h2 id="teamTitle"></h2><div class="modal-sub" id="teamSubtitle"></div></header>
+   <div class="modal-grid">
+    <div class="data-card"><span>Matchs joués</span><strong>À renseigner</strong></div>
+    <div class="data-card"><span>Victoires / défaites</span><strong>À renseigner</strong></div>
+    <div class="data-card"><span>Maps jouées</span><strong>À renseigner</strong></div>
+   </div>
+   <div class="stats-columns">
+    <section class="stats-panel"><h3>Top 3 · Maps les plus jouées</h3><p>Classement par fréquence de sélection</p>
+     <div class="top-line"><span class="top-number">1</span><div><div class="top-name">À renseigner</div><div class="top-track"><i></i></div></div><span class="top-value">—</span></div>
+     <div class="top-line"><span class="top-number">2</span><div><div class="top-name">À renseigner</div><div class="top-track"><i></i></div></div><span class="top-value">—</span></div>
+     <div class="top-line"><span class="top-number">3</span><div><div class="top-name">À renseigner</div><div class="top-track"><i></i></div></div><span class="top-value">—</span></div>
+     <div class="stats-empty">Les barres montreront la fréquence réelle dès que les résultats des matchs seront disponibles.</div>
+    </section>
+    <section class="stats-panel"><h3>Top 3 · Maps les plus bannies</h3><p>Classement par fréquence de ban</p>
+     <div class="top-line"><span class="top-number">1</span><div><div class="top-name">À renseigner</div><div class="top-track"><i></i></div></div><span class="top-value">—</span></div>
+     <div class="top-line"><span class="top-number">2</span><div><div class="top-name">À renseigner</div><div class="top-track"><i></i></div></div><span class="top-value">—</span></div>
+     <div class="top-line"><span class="top-number">3</span><div><div class="top-name">À renseigner</div><div class="top-track"><i></i></div></div><span class="top-value">—</span></div>
+     <div class="stats-empty">Les fréquences de ban seront calculées à partir de l'historique de veto FACEIT.</div>
+    </section>
+   </div>
   </div>
-  <div class="modal-section"><h3>Roster — clique sur un joueur</h3><div class="modal-roster" id="teamRoster"></div></div>
-  <div class="modal-section"><h3>Maps jouées</h3><div class="pending">Les maps et leurs résultats seront affichés ici dès que les données des matchs seront disponibles.</div></div>
-  <div class="modal-section"><h3>Bans / picks</h3><div class="pending">Historique des bans et picks non renseigné pour le moment.</div></div>
  </section>
 </div>
 <div class="modal-backdrop" id="playerBackdrop" role="dialog" aria-modal="true" aria-labelledby="playerTitle">
