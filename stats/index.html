@@ -31,7 +31,7 @@
 #teamRoster{display:flex;flex-direction:column;gap:9px}
 #teamRoster .roster-button{width:100%;min-height:62px}
 .team-main{padding:32px clamp(18px,4vw,54px);overflow:auto;position:relative}
-.team-main-head{padding-right:48px;margin-bottom:25px}.team-main-head h2{font-size:clamp(25px,3vw,38px);margin:6px 0}.team-main-head .modal-sub{margin:0}
+.team-main-head{padding-right:48px;margin-bottom:25px}.back-team{display:inline-flex;align-items:center;gap:8px;margin:0 0 20px;padding:9px 13px;border:1px solid var(--line);border-radius:10px;background:#202938;color:var(--text);font:inherit;font-size:13px;cursor:pointer}.back-team:hover{border-color:var(--accent);color:var(--accent)}.team-main-head h2{font-size:clamp(25px,3vw,38px);margin:6px 0}.team-main-head .modal-sub{margin:0}
 .team-main .modal-grid{margin:0 0 24px}
 .stats-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
 .stats-panel{background:#141d2a;border:1px solid var(--line);border-radius:16px;padding:20px;min-width:0}
@@ -67,25 +67,19 @@
   <aside class="team-sidebar"><div class="modal-kicker">Roster</div><h3>Joueurs · sélectionner</h3><div id="teamRoster"></div></aside>
   <div class="team-main">
    <button class="close" type="button" data-close="team" aria-label="Fermer">×</button>
-   <header class="team-main-head"><div class="modal-kicker">Fiche équipe · Goud Lan Third Edition</div><h2 id="teamTitle"></h2><div class="modal-sub" id="teamSubtitle"></div></header>
-   <div class="modal-grid">
-    <div class="data-card"><span>Matchs joués</span><strong>À renseigner</strong></div>
-    <div class="data-card"><span>Victoires / défaites</span><strong>À renseigner</strong></div>
-    <div class="data-card"><span>Maps jouées</span><strong>À renseigner</strong></div>
+   <header class="team-main-head"><button class="back-team" type="button" id="backToTeams">← Retour aux équipes</button><div class="modal-kicker">Fiche équipe · Goud Lan Third Edition</div><h2 id="teamTitle"></h2><div class="modal-sub" id="teamSubtitle"></div></header>
+   <div class="stats-columns" id="teamStats">
+    <section class="stats-panel"><h3>Maps jouées · Contrôle</h3><p>Top 3 des maps les plus jouées dans ce mode</p><div class="stats-empty">Statistiques à renseigner depuis l'historique des matchs.</div></section>
+    <section class="stats-panel"><h3>Maps jouées · Escorte</h3><p>Top 3 des maps les plus jouées dans ce mode</p><div class="stats-empty">Statistiques à renseigner depuis l'historique des matchs.</div></section>
+    <section class="stats-panel"><h3>Maps jouées · Hybride</h3><p>Top 3 des maps les plus jouées dans ce mode</p><div class="stats-empty">Statistiques à renseigner depuis l'historique des matchs.</div></section>
+    <section class="stats-panel"><h3>Maps jouées · Avancée (Push)</h3><p>Top 3 des maps les plus jouées dans ce mode</p><div class="stats-empty">Statistiques à renseigner depuis l'historique des matchs.</div></section>
+    <section class="stats-panel"><h3>Maps jouées · Point éclair (Flashpoint)</h3><p>Top 3 des maps les plus jouées dans ce mode</p><div class="stats-empty">Statistiques à renseigner depuis l'historique des matchs.</div></section>
+    <section class="stats-panel"><h3>Maps jouées · Choc (Clash)</h3><p>Top 3 des maps les plus jouées dans ce mode</p><div class="stats-empty">Statistiques à renseigner depuis l'historique des matchs.</div></section>
    </div>
-   <div class="stats-columns">
-    <section class="stats-panel"><h3>Top 3 · Maps les plus jouées</h3><p>Classement par fréquence de sélection</p>
-     <div class="top-line"><span class="top-number">1</span><div><div class="top-name">À renseigner</div><div class="top-track"><i></i></div></div><span class="top-value">—</span></div>
-     <div class="top-line"><span class="top-number">2</span><div><div class="top-name">À renseigner</div><div class="top-track"><i></i></div></div><span class="top-value">—</span></div>
-     <div class="top-line"><span class="top-number">3</span><div><div class="top-name">À renseigner</div><div class="top-track"><i></i></div></div><span class="top-value">—</span></div>
-     <div class="stats-empty">Les barres montreront la fréquence réelle dès que les résultats des matchs seront disponibles.</div>
-    </section>
-    <section class="stats-panel"><h3>Top 3 · Maps les plus bannies</h3><p>Classement par fréquence de ban</p>
-     <div class="top-line"><span class="top-number">1</span><div><div class="top-name">À renseigner</div><div class="top-track"><i></i></div></div><span class="top-value">—</span></div>
-     <div class="top-line"><span class="top-number">2</span><div><div class="top-name">À renseigner</div><div class="top-track"><i></i></div></div><span class="top-value">—</span></div>
-     <div class="top-line"><span class="top-number">3</span><div><div class="top-name">À renseigner</div><div class="top-track"><i></i></div></div><span class="top-value">—</span></div>
-     <div class="stats-empty">Les fréquences de ban seront calculées à partir de l'historique de veto FACEIT.</div>
-    </section>
+   <div class="stats-columns" style="margin-top:16px">
+    <section class="stats-panel"><h3>Top 3 · Héros bannis — Tank</h3><p>Classement des héros les plus souvent bannis</p><div class="stats-empty">Bans à renseigner.</div></section>
+    <section class="stats-panel"><h3>Top 3 · Héros bannis — Dégâts</h3><p>Classement des héros les plus souvent bannis</p><div class="stats-empty">Bans à renseigner.</div></section>
+    <section class="stats-panel"><h3>Top 3 · Héros bannis — Soutien</h3><p>Classement des héros les plus souvent bannis</p><div class="stats-empty">Bans à renseigner.</div></section>
    </div>
   </div>
  </section>
@@ -155,6 +149,7 @@
   card.addEventListener('click',()=>openTeam(card));
   card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openTeam(card)}});
  });
+ document.getElementById('backToTeams').addEventListener('click',()=>close('team'));
  document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>close(b.dataset.close)));
  teamBackdrop.addEventListener('click',e=>{if(e.target===teamBackdrop)close('team')});
  playerBackdrop.addEventListener('click',e=>{if(e.target===playerBackdrop)close('player')});
