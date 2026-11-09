@@ -106,7 +106,15 @@
    {name:'Hiwatara',img:'https://distribution.faceit-cdn.net/images/6dcc9b6b-373a-42dd-976a-7e49b870321b.jpg'},
    {name:'lix_ow',img:'https://distribution.faceit-cdn.net/images/7b7b75ae-9ed5-40cc-a46e-65fcdd70f891.jpg'},
    {name:'MaiSuuu',img:''}
-  ]
+  ],
+  "La Bande a Picsou":[{"name":"Otosh","img":"https://distribution.faceit-cdn.net/images/52f1e8de-e3db-477d-884e-062bcab94f50.jpg"},{"name":"GGek","img":"https://distribution.faceit-cdn.net/images/5fe77c84-09c1-4c68-a961-b26e74db860a.jpg"},{"name":"Innenbi","img":"https://distribution.faceit-cdn.net/images/cb83d89c-cce1-4d4b-a46d-dd6d4c74c070.jpg"},{"name":"Teter5","img":"https://distribution.faceit-cdn.net/images/6728eb36-0dcb-43e4-8692-9d79933b9e6d.jpg"},{"name":"Zaow1","img":"https://distribution.faceit-cdn.net/images/b405cb31-72dd-4435-93f7-e0145de1bb51.jpg"}],
+  "Wati Last Danse":[{"name":"Noheen","img":""},{"name":"Frite69","img":""},{"name":"SeguMakizaR","img":""},{"name":"Slifos","img":""},{"name":"Xx_coco_xXX","img":""},{"name":"Follaient","img":"","status":"Coach · compté comme joueur"}],
+  "team_Galwyn":[{"name":"Galwyn","img":"https://distribution.faceit-cdn.net/images/a03e5a13-2aa9-48c7-b639-5f705549f5e1.jpg"},{"name":"MineRabbit","img":"https://distribution.faceit-cdn.net/images/8096423f-b7a9-4e5d-a32c-cc41645b04a0.jpeg"},{"name":"NeoFried","img":"https://distribution.faceit-cdn.net/images/9b532570-35b0-4a0d-8164-03ed280ce8aa.jpg"},{"name":"Nexo_ow","img":"https://distribution.faceit-cdn.net/images/61276753-b3ec-405c-aa72-2ee4101d9081.jpg"},{"name":"Warglabidoo","img":"https://distribution.faceit-cdn.net/images/c7d00701-c4be-4418-9442-850bbf0f617d.jpg"}],
+  "Dawn":[{"name":"orilavoiture","img":""},{"name":"H3late","img":""},{"name":"KhrIsl","img":""},{"name":"Lvckyaf","img":""},{"name":"zobawhite","img":""},{"name":"Samcamar1","img":"","status":"Coach · compté comme joueur"}],
+  "team_Dip_impact":[{"name":"Dip_impact","img":"https://distribution.faceit-cdn.net/images/84530983-7cdb-4c73-8edc-9876fcdb1079.jpeg"},{"name":"GOGOOGOOO","img":"https://distribution.faceit-cdn.net/images/529c5199-65ef-4383-95f8-115bfb73cf5f.jpeg"},{"name":"Kiioo0","img":"https://distribution.faceit-cdn.net/images/8aeb9bd9-a036-4717-bb64-c67b7a43b89b.jpeg"},{"name":"Owstrix","img":"https://distribution.faceit-cdn.net/images/8d60c7d4-49f6-4778-a356-2d8e9e6cef86.jpg"},{"name":"PRDZII","img":""}],
+  "Arcana Lunaris":[{"name":"Nexola","img":"https://distribution.faceit-cdn.net/images/53b36fde-7bff-4255-b404-0199deaa143e.jpg"},{"name":"cCleo","img":"https://distribution.faceit-cdn.net/images/b0dfaa2d-aa1f-433f-a809-86fdb03cf457.jpg"},{"name":"sl0w_OW","img":"https://distribution.faceit-cdn.net/images/24c5602c-a15a-4c05-ac4d-e02103b2b0b1.jpg"},{"name":"Toundraa","img":"https://distribution.faceit-cdn.net/images/a0610940-2efb-4ffc-a8d2-ff23905065f6.jpg"},{"name":"Zayano696","img":"https://distribution.faceit-cdn.net/images/28584b07-0042-47e6-8af3-1c18d580cf8c.jpg"}],
+  "En ole killinnostunut":[{"name":"CYEEEL","img":""},{"name":"kalmarz","img":""},{"name":"kase","img":""},{"name":"Neissan_ow","img":""},{"name":"Sauna","img":""},{"name":"haaladeen_ow","img":"","status":"Remplaçant"}],
+  "French Riviera Azure":[{"name":"Roz0w","img":""},{"name":"eragoN_ow","img":""},{"name":"lulutrim","img":""},{"name":"Ota_OW","img":""},{"name":"Pierric","img":""},{"name":"Sashaaa_ow","img":"","status":"Remplaçant"},{"name":"PozOr_ow","img":"","status":"Remplaçant"}]
  };
  function openTeam(card){
   const name=card.querySelector('.team-name').textContent.trim();
@@ -120,11 +128,13 @@
     const avatar=p.img?'<img src="'+p.img+'" alt="">':'<span class="player-avatar">'+p.name.charAt(0).toUpperCase()+'</span>';
     b.innerHTML=avatar+'<span><b></b><small>Ouvrir la fiche joueur</small></span>';
     b.querySelector('b').textContent=p.name;
+    b.querySelector('small').textContent=p.status||'Ouvrir la fiche joueur';
     b.addEventListener('click',()=>openPlayer(p,name));teamRoster.appendChild(b);
    });
   }else{
    const note=document.createElement('div');note.className='pending';note.textContent='Les pseudos des joueurs de cette équipe ne sont pas encore renseignés. Envoie sa composition pour rendre les fiches joueurs accessibles.';teamRoster.appendChild(note);
   }
+  if(players.length)teamSubtitle.textContent=players.length+' personnes renseignées · Tournoi FACEIT';
   teamBackdrop.classList.add('open');document.body.style.overflow='hidden';
  }
  function openPlayer(p,team){
@@ -140,6 +150,15 @@
   if(!teamBackdrop.classList.contains('open')&&!playerBackdrop.classList.contains('open'))document.body.style.overflow='';
  }
  document.querySelectorAll('.team').forEach(card=>{
+  const teamName=card.querySelector('.team-name').textContent.trim();
+  const members=knownRoster[teamName];
+  if(members){
+   card.querySelector('.team-meta').textContent=members.length+' personnes renseignées';
+   let roster=card.querySelector('.roster');
+   if(!roster){roster=document.createElement('div');roster.className='roster';card.querySelector('.team-info').appendChild(roster)}
+   roster.innerHTML='';
+   members.forEach(p=>{const chip=document.createElement('span');chip.className='player';const avatar=p.img?document.createElement('img'):document.createElement('span');if(p.img){avatar.src=p.img;avatar.alt=''}else{avatar.className='player-avatar';avatar.textContent=p.name.charAt(0).toUpperCase()}const label=document.createElement('b');label.textContent=p.name;chip.append(avatar,label);if(p.status)chip.title=p.status;roster.appendChild(chip)});
+  }
   card.setAttribute('tabindex','0');card.setAttribute('role','button');
   card.setAttribute('aria-label','Ouvrir la fiche de '+card.querySelector('.team-name').textContent.trim());
   card.addEventListener('click',()=>openTeam(card));
