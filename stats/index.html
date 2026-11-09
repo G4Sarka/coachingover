@@ -24,6 +24,7 @@
 @media(max-width:650px){.modal{padding:22px 16px}.modal-grid{grid-template-columns:1fr}.modal-roster{grid-template-columns:1fr}.player-stats{grid-template-columns:1fr}.modal-backdrop{padding:10px}}
 
 .rank-panel{background:#1c1d20;border:1px solid #37393e;border-radius:16px;padding:20px 18px 14px;min-width:0}.rank-panel h4{margin:0;font-size:15px;text-transform:uppercase;letter-spacing:1.3px;color:#f3f4f6}.rank-panel>p{font-size:12px;color:#a1a1aa;margin:5px 0 15px}.rank-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid #34363b}.rank-avatar{width:42px;height:42px;border-radius:7px;background:#31363e;color:#aeb5bf;display:grid;place-items:center;font-size:16px;font-weight:800;flex-shrink:0}.rank-info{min-width:0;flex:1}.rank-details{display:flex;justify-content:space-between;align-items:center;gap:9px;font-size:13px}.rank-details strong{font-weight:650;overflow-wrap:anywhere}.rank-details>span{color:#8f949e;white-space:nowrap;font-size:11px}.rank-details b{color:#45d68f;font-size:15px;margin-left:7px}.rank-bar{height:8px;border-radius:8px;background:#30373b;margin-top:9px;overflow:hidden}.rank-bar span{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,#26885b,#4cda8e)}
+.player-role-label{display:inline-block;padding:7px 14px;border:1px solid #4c586a;border-radius:999px;background:#222b38;color:#ffb05c;font-size:13px;font-weight:800;margin:0 0 18px}.player-rank-panel{text-align:left}.player-modal .modal-sub{margin-bottom:14px}
 /* Fiche équipe plein écran */
 .team-stats-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}.stats-stack{display:grid;gap:14px;min-width:0}.stats-group-title{margin:0 0 2px;font-size:19px;color:var(--accent)}
 @media(max-width:900px){.team-stats-layout{grid-template-columns:1fr}}
@@ -78,13 +79,13 @@
 <div class="modal-backdrop" id="playerBackdrop" role="dialog" aria-modal="true" aria-labelledby="playerTitle">
  <section class="modal player-modal"><button class="close" type="button" data-close="player" aria-label="Fermer">×</button>
   <div class="modal-kicker">Fiche joueur</div><div id="playerAvatar"></div><h2 id="playerTitle"></h2><div class="modal-sub" id="playerTeam"></div>
-  <div class="player-stats">
-   <div class="data-card"><span>Personnage / agent le plus joué</span><strong>À renseigner</strong></div>
-   <div class="data-card"><span>Nombre de parties</span><strong>À renseigner</strong></div>
-   <div class="data-card"><span>Temps de jeu</span><strong>À renseigner</strong></div>
-   <div class="data-card"><span>Statistiques individuelles</span><strong>À renseigner</strong></div>
-  </div>
-  <p class="pending" style="margin-top:16px">Les statistiques personnelles et les personnages favoris ne sont pas visibles dans la liste d’inscription. Elles seront ajoutées avec les profils ou résultats du joueur.</p>
+  <div class="player-role-label" id="playerRole"></div>
+  <section class="rank-panel player-rank-panel"><h4 id="playerRankTitle">Top 3 · Héros joués</h4><p>Classement des héros les plus joués pour ce joueur et son rôle</p>
+   <div class="rank-row"><span class="rank-avatar">1</span><div class="rank-info"><div class="rank-details"><strong>À renseigner</strong><span>— parties <b>—%</b></span></div><div class="rank-bar"><span style="width:0%"></span></div></div></div>
+   <div class="rank-row"><span class="rank-avatar">2</span><div class="rank-info"><div class="rank-details"><strong>À renseigner</strong><span>— parties <b>—%</b></span></div><div class="rank-bar"><span style="width:0%"></span></div></div></div>
+   <div class="rank-row"><span class="rank-avatar">3</span><div class="rank-info"><div class="rank-details"><strong>À renseigner</strong><span>— parties <b>—%</b></span></div><div class="rank-bar"><span style="width:0%"></span></div></div></div>
+  </section>
+  <p class="pending" style="margin-top:16px">Les statistiques de héros seront complétées à partir des données de jeu du joueur. Aucun chiffre fictif n'est affiché.</p>
  </section>
 </div>
 <script>
@@ -97,6 +98,7 @@
  const playerTitle=document.getElementById('playerTitle');
  const playerTeam=document.getElementById('playerTeam');
  const playerAvatar=document.getElementById('playerAvatar');
+ const playerRoles={'CaptenErwan':'Tank','SawlFr':'DPS','lix_ow':'DPS','MaiSuuu':'Support','Hiwatara':'Support'};
  const knownRoster={
   'Eclater au Sawl':[
    {name:'SawlFr',img:'https://distribution.faceit-cdn.net/images/de3532d0-9f0b-4dc7-abd8-ce86d2da6902.jpg'},
@@ -127,6 +129,9 @@
  }
  function openPlayer(p,team){
   playerTitle.textContent=p.name;playerTeam.textContent=team;
+  const role=playerRoles[p.name]||'À renseigner';
+  document.getElementById('playerRole').textContent='Rôle : '+role;
+  document.getElementById('playerRankTitle').textContent='Top 3 · Héros joués — '+role;
   playerAvatar.innerHTML=p.img?'<img class="player-big-avatar" src="'+p.img+'" alt="">':'<div class="player-big-initial">'+p.name.charAt(0).toUpperCase()+'</div>';
   playerBackdrop.classList.add('open');
  }
