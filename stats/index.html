@@ -59,6 +59,7 @@
 
 .team-players-section h3{font-size:21px;margin:0 0 5px}.team-players-section>p{color:var(--muted);font-size:13px;margin:0 0 20px}.team-player-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.team-player-card{background:#151e2b;border:1px solid var(--line);border-radius:16px;padding:19px;min-width:0}.team-player-head{display:flex;align-items:center;gap:12px;margin-bottom:15px}.team-player-head img,.team-player-head .player-avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0}.team-player-head strong{font-size:16px;overflow-wrap:anywhere}.team-player-role{font-size:12px;color:#ffb05c;margin-top:4px}.team-player-card .rank-row{padding:9px 0}.team-player-card .rank-avatar{width:32px;height:32px;font-size:13px}.team-player-card .rank-details>span{color:#f6c45d;font-size:12px}.team-player-card .pending{margin-top:8px}.team-player-card .player-status{font-size:11px;color:var(--muted);margin-top:4px}@media(max-width:850px){.team-player-cards{grid-template-columns:1fr}}
 .team-picks{display:flex;flex-wrap:wrap;gap:9px;margin-top:8px}.team-pick{display:inline-flex;padding:9px 13px;border:1px solid #36465a;border-radius:10px;background:#202d3e;font-size:13px;font-weight:700;color:#e8f0fa}
+.team-compositions{border:1px dashed #43536a;background:rgba(30,43,60,.48);border-radius:16px;padding:20px;margin-bottom:22px}.team-compositions-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.team-compositions h3{margin:0 0 5px;font-size:20px}.team-compositions p{margin:0 0 15px;font-size:13px;color:var(--muted)}.compositions-coming{border:1px solid #43536a;border-radius:999px;padding:5px 10px;font-size:11px;color:var(--muted);white-space:nowrap}.compositions-placeholder{padding:20px;border-radius:12px;background:rgba(12,20,31,.45);color:var(--muted);font-size:13px;text-align:center}
 </style>
 </head>
 <body><main class="wrap">
@@ -89,6 +90,7 @@
   <div class="team-main">
    <button class="close" type="button" data-close="team" aria-label="Fermer">×</button>
    <header class="team-main-head"><button class="back-team" type="button" id="backToTeams">← Retour aux équipes</button><div class="modal-kicker">Fiche équipe · Goud Lan Third Edition</div><h2 id="teamTitle"></h2><div class="modal-sub" id="teamSubtitle"></div></header>
+   <section class="team-compositions"><div class="team-compositions-heading"><div><h3>Compositions jouées</h3><p>Les compositions habituelles de cette équipe seront ajoutées ici.</p></div><span class="compositions-coming">À compléter</span></div><div id="teamCompositions" class="compositions-placeholder">Aucune composition renseignée pour le moment.</div></section>
    <section class="team-players-section"><h3>Joueurs et évaluations des héros</h3><p>Rôles, héros et notes sur 5 étoiles de chaque joueur de l'équipe.</p><div id="teamPlayerCards" class="team-player-cards"></div></section>
   </div>
  </section>
