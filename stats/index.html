@@ -156,7 +156,7 @@ function loadHeroPickImage(hero,img,fallback){
  img.onload=()=>{img.classList.add('loaded');fallback.classList.add('hero-pick-label')};
  img.onerror=()=>{img.classList.add('failed');fallback.classList.remove('hero-pick-label')};
  if(key==='cat'||key==='chat'){
-  img.src='https://overwatch.fandom.com/wiki/Special:Redirect/file/Jetpack_Cat_Hero.png';
+  img.src='https://overwatch.fandom.com/wiki/Special:Redirect/file/OW2_Jetpack_Cat.png';
  }else{
   img.src='https://raw.githubusercontent.com/Name1es5/overwatch2-hero-portraits/main/'+encodeURIComponent(filename)+'.png';
  }
