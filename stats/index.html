@@ -155,7 +155,11 @@ function loadHeroPickImage(hero,img,fallback){
  const filename=heroPortraitFiles[key]||key;
  img.onload=()=>{img.classList.add('loaded');fallback.classList.add('hero-pick-label')};
  img.onerror=()=>{img.classList.add('failed');fallback.classList.remove('hero-pick-label')};
- img.src='https://raw.githubusercontent.com/Name1es5/overwatch2-hero-portraits/main/'+encodeURIComponent(filename)+'.png';
+ if(key==='cat'||key==='chat'){
+  img.src='https://overwatch.fandom.com/wiki/Special:Redirect/file/Jetpack_Cat_Hero.png';
+ }else{
+  img.src='https://raw.githubusercontent.com/Name1es5/overwatch2-hero-portraits/main/'+encodeURIComponent(filename)+'.png';
+ }
 }
  function openTeam(card){
   const name=card.querySelector('.team-name').textContent.trim();
