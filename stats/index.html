@@ -141,28 +141,14 @@
   "French Riviera Azure":[{"name":"Roz0w","img":""},{"name":"eragoN_ow","img":""},{"name":"lulutrim","img":""},{"name":"Ota_OW","img":""},{"name":"Pierric","img":""},{"name":"Sashaaa_ow","img":"","status":"Remplaçant"},{"name":"PozOr_ow","img":"","status":"Remplaçant"}]
  };
 
-// Portraits officiels des héros récupérés via l'API publique OverFast.
-let heroPortraitsPromise;
-function getHeroPortraits(){
- if(!heroPortraitsPromise)heroPortraitsPromise=fetch('https://overfast-api.tekrop.fr/heroes',{mode:'cors'}).then(r=>{if(!r.ok)throw Error('Portraits indisponibles');return r.json()}).then(list=>{
-  const images=new Map();
-  const aliases={'chat':'wrecking-ball','cat':'wrecking-ball','doc':'baptiste','shion':'sojourn'};
-  for(const h of list){const key=(h.key||h.name||'').toLowerCase();const image=h.portrait||h.icon;if(image){images.set(key,image);images.set((h.name||'').toLowerCase(),image)}}
-  for(const [alias,key] of Object.entries(aliases)){if(images.has(key))images.set(alias,images.get(key))}
-  return images;
- }).catch(()=>new Map());
- return heroPortraitsPromise;
-}
+// Portraits directs : pas d'appel API bloqué par le navigateur.
 function loadHeroPickImage(hero,img,fallback){
- getHeroPortraits().then(images=>{
-  const key=hero.toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'');
-  const aliases={'d.va':'dva','lucio':'lucio','wrecking ball':'wrecking-ball'};
-  const url=images.get(key)||images.get(aliases[key]||'');
-  if(!url)return;
-  img.onload=()=>{img.hidden=false;fallback.classList.add('hero-pick-label')};
-  img.onerror=()=>{img.hidden=true;fallback.classList.remove('hero-pick-label')};
-  img.src=url;
- });
+ const names={'D.Va':'D.Va','Lúcio':'Lúcio','Chat':'Jetpack Cat','Cat':'Jetpack Cat','Doc':'Baptiste','Freya':'Freja'};
+ const name=names[hero]||hero;
+ const url='https://overwatch.fandom.com/wiki/Special:Redirect/file/'+encodeURIComponent(name+' Hero.png');
+ img.onload=()=>{img.hidden=false;fallback.classList.add('hero-pick-label')};
+ img.onerror=()=>{img.hidden=true;fallback.classList.remove('hero-pick-label')};
+ img.src=url;
 }
  function openTeam(card){
   const name=card.querySelector('.team-name').textContent.trim();
