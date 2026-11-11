@@ -149,7 +149,7 @@
  };
 
 // Portraits hébergés sur GitHub, avec une URL stable par héros.
-const heroPortraitFiles={'d.va':'d.va','junker queen':'queen','soldier: 76':'soldier76','wrecking ball':'wreckingball','widowmaker':'widow','zenyatta':'zen','freya':'freja','chat':'wreckingball','cat':'wreckingball','doc':'baptiste'};
+const heroPortraitFiles={'d.va':'d.va','junker queen':'queen','soldier: 76':'soldier76','wrecking ball':'wreckingball','widowmaker':'widow','zenyatta':'zen','freya':'freja','chat':'jetpack-cat','cat':'jetpack-cat','doc':'baptiste'};
 function loadHeroPickImage(hero,img,fallback){
  const key=hero.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
  const filename=heroPortraitFiles[key]||key;
