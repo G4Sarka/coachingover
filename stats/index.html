@@ -25,6 +25,7 @@
 
 .rank-panel{background:#1c1d20;border:1px solid #37393e;border-radius:16px;padding:20px 18px 14px;min-width:0}.rank-panel h4{margin:0;font-size:15px;text-transform:uppercase;letter-spacing:1.3px;color:#f3f4f6}.rank-panel>p{font-size:12px;color:#a1a1aa;margin:5px 0 15px}.rank-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid #34363b}.rank-avatar{width:42px;height:42px;border-radius:7px;background:#31363e;color:#aeb5bf;display:grid;place-items:center;font-size:16px;font-weight:800;flex-shrink:0}.rank-info{min-width:0;flex:1}.rank-details{display:flex;justify-content:space-between;align-items:center;gap:9px;font-size:13px}.rank-details strong{font-weight:650;overflow-wrap:anywhere}.rank-details>span{color:#8f949e;white-space:nowrap;font-size:11px}.rank-details b{color:#45d68f;font-size:15px;margin-left:7px}.rank-bar{height:8px;border-radius:8px;background:#30373b;margin-top:9px;overflow:hidden}.rank-bar span{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,#26885b,#4cda8e)}
 .player-role-label{display:inline-block;padding:7px 14px;border:1px solid #4c586a;border-radius:999px;background:#222b38;color:#ffb05c;font-size:13px;font-weight:800;margin:0 0 18px}.player-rank-panel{text-align:left}.player-modal .modal-sub{margin-bottom:14px}
+.star-score{color:#f6c45d!important;font-weight:750;font-size:13px!important}
 /* Fiche équipe plein écran */
 .team-stats-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}.stats-stack{display:grid;gap:14px;min-width:0}.stats-group-title{margin:0 0 2px;font-size:19px;color:var(--accent)}
 @media(max-width:900px){.team-stats-layout{grid-template-columns:1fr}}
@@ -80,12 +81,8 @@
  <section class="modal player-modal"><button class="close" type="button" data-close="player" aria-label="Fermer">×</button>
   <div class="modal-kicker">Fiche joueur</div><div id="playerAvatar"></div><h2 id="playerTitle"></h2><div class="modal-sub" id="playerTeam"></div>
   <div class="player-role-label" id="playerRole"></div>
-  <section class="rank-panel player-rank-panel"><h4 id="playerRankTitle">Top 3 · Héros joués</h4><p>Classement des héros les plus joués pour ce joueur et son rôle</p>
-   <div class="rank-row"><span class="rank-avatar">1</span><div class="rank-info"><div class="rank-details"><strong>À renseigner</strong><span>— parties <b>—%</b></span></div><div class="rank-bar"><span style="width:0%"></span></div></div></div>
-   <div class="rank-row"><span class="rank-avatar">2</span><div class="rank-info"><div class="rank-details"><strong>À renseigner</strong><span>— parties <b>—%</b></span></div><div class="rank-bar"><span style="width:0%"></span></div></div></div>
-   <div class="rank-row"><span class="rank-avatar">3</span><div class="rank-info"><div class="rank-details"><strong>À renseigner</strong><span>— parties <b>—%</b></span></div><div class="rank-bar"><span style="width:0%"></span></div></div></div>
-  </section>
-  <p class="pending" style="margin-top:16px">Les statistiques de héros seront complétées à partir des données de jeu du joueur. Aucun chiffre fictif n'est affiché.</p>
+  <section class="rank-panel player-rank-panel"><h4 id="playerRankTitle">Maîtrise des héros</h4><p>Notes fournies sur 5 étoiles (pas des statistiques de matchs)</p><div id="playerHeroRatings"></div></section>
+  <p class="pending" id="playerRatingNote" style="margin-top:16px"></p>
  </section>
 </div>
 <script>
@@ -99,6 +96,8 @@
  const playerTeam=document.getElementById('playerTeam');
  const playerAvatar=document.getElementById('playerAvatar');
  const playerRoles={"CaptenErwan":"Tank","SawlFr":"DPS","lix_ow":"DPS","MaiSuuu":"Support","Hiwatara":"Support","Xx_coco_xXX":"Tank","Slifos":"DPS","SeguMakizaR":"DPS","Frite69":"Support","Noheen":"Support","Follaient":"Support","Nexola":"Support","cCleo":"Support","sl0w_OW":"Tank","Toundraa":"DPS","Zayano696":"DPS","Dip_impact":"DPS","GOGOOGOOO":"Support","Kiioo0":"DPS","Owstrix":"Tank","PRDZII":"Support","Galwyn":"DPS","Nexo_ow":"DPS","Warglabidoo":"Tank","NeoFried":"Support","MineRabbit":"Support","Zaow1":"DPS","GGek":"DPS","Teter5":"Support","Innenbi":"Support","Otosh":"Tank"};
+ const heroRatings={"SawlFr":[["Reaper",3],["Anran",3.5],["Tracer",2]],"CaptenErwan":[["D.Va",3]],"Otosh":[["D.Va",4],["Ramattra",4],["Winston",3],["Orisa",3]],"GGek":[["Shion",5],["Reaper",4],["Tracer",3],["Vendetta",3]],"Innenbi":[["Kiriko",4],["Sombra",2]],"Teter5":[["Kiriko",4],["Ana",5],["Chat",2]],"Zaow1":[["Tracer",4],["Cassidy",5]],"SeguMakizaR":[["Tracer",3]],"Slifos":[["Anran",3],["Freya",4]],"Xx_coco_xXX":[["Sigma",3]],"Galwyn":[["Cassidy",4],["Sojourn",5]],"MineRabbit":[["Kiriko",5]],"Nexo_ow":[["Genji",5],["Tracer",3]],"Dip_impact":[["Tracer",5],["Vendetta",5]],"GOGOOGOOO":[["Lúcio",5],["Chat",5]],"Kiioo0":[["Cassidy",5],["Sojourn",5]],"Owstrix":[["Wrecking Ball",5],["Winston",5],["Orisa",5]],"PRDZII":[["Ana",5],["Kiriko",5]],"Nexola":[["Kiriko",3]],"sl0w_OW":[["Reinhardt",3],["Mauga",3]],"Toundraa":[["Sojourn",3],["Cassidy",3]],"Zayano696":[["Vendetta",null]],"Roz0w":[["Tracer",4],["Mei",4]],"eragoN_ow":[["Sigma",3],["Ramattra",4],["D.Va",3]],"lulutrim":[["Lúcio",3]],"Ota_OW":[["Kiriko",5],["Baptiste",4]],"Pierric":[["Cassidy",4],["Sojourn",4]],"Sashaaa_ow":[["Wrecking Ball",4]],"PozOr_ow":[["Lúcio",4],["Chat",4],["Sombra",3]],"CYEEEL":[["Cat",4],["Lúcio",4]],"kase":[["Tracer",5]],"Neissan_ow":[["Sojourn",4],["Tracer",4],["Cassidy",4]]};
+ Object.assign(playerRoles,{"Roz0w":"DPS","eragoN_ow":"Tank","lulutrim":"Support","Ota_OW":"Support","Pierric":"DPS","Sashaaa_ow":"Tank","PozOr_ow":"Support","CYEEEL":"Support","Neissan_ow":"DPS","Sauna":"Tank","haaladeen_ow":"Tank","kase":"DPS"});
  const knownRoster={
   'Eclater au Sawl':[
    {name:'SawlFr',img:'https://distribution.faceit-cdn.net/images/de3532d0-9f0b-4dc7-abd8-ce86d2da6902.jpg'},
@@ -141,7 +140,25 @@
   playerTitle.textContent=p.name;playerTeam.textContent=team;
   const role=playerRoles[p.name]||'À renseigner';
   document.getElementById('playerRole').textContent='Rôle : '+role;
-  document.getElementById('playerRankTitle').textContent='Top 3 · Héros joués — '+role;
+  document.getElementById('playerRankTitle').textContent='Héros évalués — '+role;
+  const target=document.getElementById('playerHeroRatings');
+  target.replaceChildren();
+  const heroes=heroRatings[p.name]||[];
+  const note=document.getElementById('playerRatingNote');
+  note.textContent=heroes.length?'Évaluations communiquées, sur 5 étoiles. Elles ne représentent pas un taux de victoire ou une fréquence de jeu.':'Héros et notes non renseignés pour ce joueur.';
+  if(heroes.length){
+   heroes.slice().sort((a,b)=>(b[1]??-1)-(a[1]??-1)).forEach(([hero,rating])=>{
+    const row=document.createElement('div');row.className='rank-row';
+    const badge=document.createElement('span');badge.className='rank-avatar';badge.textContent='★';
+    const info=document.createElement('div');info.className='rank-info';
+    const details=document.createElement('div');details.className='rank-details';
+    const label=document.createElement('strong');label.textContent=hero;
+    const score=document.createElement('span');score.className='star-score';score.textContent=rating===null?'Note à préciser':String(rating).replace('.',',')+' / 5 ★';
+    const track=document.createElement('div');track.className='rank-bar';
+    const fill=document.createElement('span');fill.style.width=rating===null?'0%':(rating/5*100)+'%';
+    details.append(label,score);track.append(fill);info.append(details,track);row.append(badge,info);target.append(row);
+   });
+  }
   playerAvatar.innerHTML=p.img?'<img class="player-big-avatar" src="'+p.img+'" alt="">':'<div class="player-big-initial">'+p.name.charAt(0).toUpperCase()+'</div>';
   playerBackdrop.classList.add('open');
  }
