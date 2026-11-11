@@ -58,6 +58,7 @@
 .team[data-color]:hover{box-shadow:0 0 0 2px var(--team-tint);border-color:var(--team-color)}
 
 .team-players-section h3{font-size:21px;margin:0 0 5px}.team-players-section>p{color:var(--muted);font-size:13px;margin:0 0 20px}.team-player-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.team-player-card{background:#151e2b;border:1px solid var(--line);border-radius:16px;padding:19px;min-width:0}.team-player-head{display:flex;align-items:center;gap:12px;margin-bottom:15px}.team-player-head img,.team-player-head .player-avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0}.team-player-head strong{font-size:16px;overflow-wrap:anywhere}.team-player-role{font-size:12px;color:#ffb05c;margin-top:4px}.team-player-card .rank-row{padding:9px 0}.team-player-card .rank-avatar{width:32px;height:32px;font-size:13px}.team-player-card .rank-details>span{color:#f6c45d;font-size:12px}.team-player-card .pending{margin-top:8px}.team-player-card .player-status{font-size:11px;color:var(--muted);margin-top:4px}@media(max-width:850px){.team-player-cards{grid-template-columns:1fr}}
+.team-picks{display:flex;flex-wrap:wrap;gap:9px;margin-top:8px}.team-pick{display:inline-flex;padding:9px 13px;border:1px solid #36465a;border-radius:10px;background:#202d3e;font-size:13px;font-weight:700;color:#e8f0fa}
 </style>
 </head>
 <body><main class="wrap">
@@ -168,17 +169,13 @@
    head.append(avatar,identity);panel.append(head);
    const heroes=(heroRatings[p.name]||[]).slice().sort((a,b)=>(b[1]??-1)-(a[1]??-1));
    if(!heroes.length){const empty=document.createElement('div');empty.className='pending';empty.textContent='Héros et notes non renseignés';panel.append(empty)}
-   heroes.forEach(([hero,rating])=>{
-    const row=document.createElement('div');row.className='rank-row';
-    const badge=document.createElement('span');badge.className='rank-avatar';badge.textContent='★';
-    const info=document.createElement('div');info.className='rank-info';
-    const details=document.createElement('div');details.className='rank-details';
-    const label=document.createElement('strong');label.textContent=hero;
-    const score=document.createElement('span');score.textContent=rating==null?'Note à préciser':String(rating).replace('.',',')+' / 5 ★';
-    const track=document.createElement('div');track.className='rank-bar';
-    const fill=document.createElement('span');fill.style.width=rating==null?'0%':rating*20+'%';
-    details.append(label,score);track.append(fill);info.append(details,track);row.append(badge,info);panel.append(row);
-   });
+   if(heroes.length){
+    const picks=document.createElement('div');picks.className='team-picks';
+    heroes.forEach(([hero])=>{
+     const pick=document.createElement('span');pick.className='team-pick';pick.textContent=hero;picks.append(pick);
+    });
+    panel.append(picks);
+   }
    cards.append(panel);
   });
   if(players.length)teamSubtitle.textContent=players.length+' personnes renseignées · Tournoi FACEIT';
